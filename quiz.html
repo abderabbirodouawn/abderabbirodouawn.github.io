@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Quiz Réseaux – Abderabbi Rodouawn</title>
+  <meta name="description" content="Quiz interactif réseaux : TCP/IP, adressage IP, DHCP/DNS, Linux, commandes réseau.">
+  <style>
+    :root{--bg:#0f172a;--panel:#0b1222;--ring:#1f2937;--accent:#60a5fa;--text:#e5e7eb;--muted:#9ca3b8;}
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
+    .wrap{max-width:900px;margin:0 auto;padding:24px}
+    .card{background:var(--panel);border:1px solid var(--ring);border-radius:18px;padding:18px;box-shadow:0 8px 22px rgba(0,0,0,.2)}
+    h1{margin:0 0 10px;font-size:clamp(24px,4vw,32px)}
+    .muted{color:var(--muted)}
+    .qnum{font-size:13px;color:var(--muted);margin-bottom:6px}
+    .q{font-weight:600;margin:8px 0 12px}
+    .choices{display:grid;gap:8px}
+    .choice{border:1px solid #334155;background:#0f172a;border-radius:12px;padding:10px;cursor:pointer}
+    .choice input{margin-right:8px}
+    .actions{display:flex;gap:10px;margin-top:14px}
+    button{border:1px solid var(--accent);background:transparent;color:var(--text);padding:10px 14px;border-radius:12px;cursor:pointer}
+    button:hover{background:#0f172a}
+    .result{margin-top:10px}
+    .good{color:#10b981}
+    .bad{color:#f87171}
+    .score{margin-top:18px;padding:12px;border:1px dashed #334155;border-radius:12px}
+    a{color:#93c5fd;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <h1>Quiz Réseaux (Quizzfly)</h1>
+      <a href="./" aria-label="Retour au portfolio">← Retour au portfolio</a>
+    </div>
+    <p class="muted">Réponds aux questions une par une. On te dit si c’est correct et on donne la bonne réponse si c’est faux. Score final à la fin. Bonne chance !</p>
+
+    <div class="card" id="card">
+      <div class="qnum" id="qnum"></div>
+      <div class="q" id="question"></div>
+      <div class="choices" id="choices"></div>
+
+      <div class="actions">
+        <button id="valider">Valider</button>
+        <button id="suivant" disabled>Question suivante</button>
+        <button id="rejouer" style="display:none">Rejouer</button>
+      </div>
+
+      <div class="result" id="result"></div>
+      <div class="score" id="score" style="display:none"></div>
+    </div>
+  </div>
+
+  <script>
+    // === Banque de questions (tu peux en ajouter/retirer) ===
+    const QUESTIONS = [
+      {
+        q: "Quel protocole est utilisé pour traduire un nom de domaine en adresse IP ?",
+        choices: ["DHCP", "DNS", "FTP", "ARP"],
+        answer: 1, // index de la bonne réponse
+        explain: "DNS (Domain Name System) traduit des noms (ex: example.com) en adresses IP."
+      },
+      {
+        q: "Quelle commande Windows affiche la configuration IP d'une machine ?",
+        choices: ["ipconfig", "ifconfig", "route", "nslookup"],
+        answer: 0,
+        explain: "Sous Windows, on utilise ipconfig. ifconfig est l'équivalent historique sur Linux."
+      },
+      {
+        q: "Quel est le rôle principal du DHCP ?",
+        choices: ["Attribuer automatiquement des adresses IP", "Chiffrer les paquets", "Transférer des fichiers", "Tracer les routes"],
+        answer: 0,
+        explain: "DHCP (Dynamic Host Configuration Protocol) attribue automatiquement IP, passerelle, DNS."
+      },
+      {
+        q: "Quelle adresse IPv4 privée est valide ?",
+        choices: ["8.8.8.8", "172.16.5.10", "1.1.1.1", "203.0.113.15"],
+        answer: 1,
+        explain: "Les plages privées incluent 10.0.0.0/8, 172.16.0.0/12 et 192.168.0.0/16."
+      },
+      {
+        q: "Quelle commande teste la connectivité vers une destination en affichant chaque saut ?",
+        choices: ["ping", "traceroute/tracert", "nslookup", "netstat"],
+        answer: 1,
+        explain: "traceroute (Linux) / tracert (Windows) liste les routeurs intermédiaires."
+      },
+      {
+        q: "Quel port TCP est utilisé par HTTP (non chiffré) ?",
+        choices: ["21", "22", "80", "443"],
+        answer: 2,
+        explain: "HTTP utilise 80/TCP, HTTPS utilise 443/TCP."
+      },
+      {
+        q: "Sur un switch, un VLAN sert à…",
+        choices: ["Chiffrer les données", "Segmenter logiquement le réseau", "NATer les adresses", "Mesurer la bande passante"],
+        answer: 1,
+        explain: "Un VLAN segmente le réseau au niveau 2 pour isoler des domaines de broadcast."
+      },
+      {
+        q: "Quelle commande interroge un serveur DNS en ligne de commande ?",
+        choices: ["nslookup", "ssh", "scp", "telnet"],
+        answer: 0,
+        explain: "nslookup (ou dig) interroge les enregistrements DNS."
+      },
+      {
+        q: "Quel outil analyse le trafic réseau en capturant des paquets ?",
+        choices: ["Wireshark", "Packet Tracer", "VirtualBox", "PowerShell"],
+        answer: 0,
+        explain: "Wireshark capture et analyse les paquets (protocoles, ports, etc.)."
+      },
+      {
+        q: "Quelle commande Linux affiche l’adresse IP et interfaces réseau (remplaçant moderne) ?",
+        choices: ["ifconfig", "ip a", "netsh", "hostname"],
+        answer: 1,
+        explain: "La suite iproute2 : 'ip a' (ou 'ip addr') remplace ifconfig."
+      }
+    ];
+
+    // === Logique du quiz ===
+    let i = 0;                 // index de la question courante
+    let score = 0;             // nombre de bonnes réponses
+    let locked = false;        // empêche de valider deux fois
+    const qnum = document.getElementById("qnum");
+    const q = document.getElementById("question");
+    const choices = document.getElementById("choices");
+    const res = document.getElementById("result");
+    const scoreBox = document.getElementById("score");
+    const btnValider = document.getElementById("valider");
+    const btnSuivant = document.getElementById("suivant");
+    const btnRejouer = document.getElementById("rejouer");
+
+    function renderQuestion() {
+      locked = false;
+      res.textContent = "";
+      btnSuivant.disabled = true;
+      qnum.textContent = `Question ${i+1} / ${QUESTIONS.length}`;
+      q.textContent = QUESTIONS[i].q;
+      choices.innerHTML = "";
+      QUESTIONS[i].choices.forEach((label, idx) => {
+        const id = `c${i}_${idx}`;
+        const div = document.createElement("label");
+        div.className = "choice";
+        div.innerHTML = `<input type="radio" name="choice" value="${idx}" id="${id}"/> ${label}`;
+        choices.appendChild(div);
+      });
+    }
+
+    function validate() {
+      if (locked) return;
+      const checked = document.querySelector('input[name="choice"]:checked');
+      if (!checked) { res.innerHTML = '<span class="bad">Choisis une réponse.</span>'; return; }
+      locked = true;
+
+      const given = Number(checked.value);
+      const good = QUESTIONS[i].answer;
+
+      if (given === good) {
+        score++;
+        res.innerHTML = '<span class="good">✅ Correct !</span>';
+      } else {
+        const goodText = QUESTIONS[i].choices[good];
+        res.innerHTML = `<span class="bad">❌ Faux.</span> La bonne réponse est : <strong>${goodText}</strong><br><span class="muted">${QUESTIONS[i].explain || ""}</span>`;
+      }
+      btnSuivant.disabled = false;
+
+      // Dernière question ?
+      if (i === QUESTIONS.length - 1) {
+        btnSuivant.textContent = "Voir le score";
+      } else {
+        btnSuivant.textContent = "Question suivante";
+      }
+    }
+
+    function next() {
+      if (i < QUESTIONS.length - 1) {
+        i++;
+        renderQuestion();
+      } else {
+        showScore();
+      }
+    }
+
+    function showScore() {
+      qnum.textContent = "Quiz terminé 🎉";
+      q.textContent = "";
+      choices.innerHTML = "";
+      res.innerHTML = "";
+      btnValider.style.display = "none";
+      btnSuivant.style.display = "none";
+      btnRejouer.style.display = "inline-block";
+
+      const pct = Math.round((score / QUESTIONS.length) * 100);
+      scoreBox.style.display = "block";
+      scoreBox.innerHTML = `<strong>Score :</strong> ${score} / ${QUESTIONS.length} (${pct}%)<br>
+        ${pct >= 80 ? "Excellent niveau réseau 💪" : pct >= 60 ? "Bien joué, continue à t'entraîner 👌" : "Pas grave, refais un tour et tu progresseras vite 🚀"}`;
+    }
+
+    function resetQuiz() {
+      i = 0; score = 0; locked = false;
+      btnValider.style.display = "inline-block";
+      btnSuivant.style.display = "inline-block";
+      btnSuivant.disabled = true;
+      btnRejouer.style.display = "none";
+      scoreBox.style.display = "none";
+      renderQuestion();
+    }
+
+    btnValider.addEventListener("click", validate);
+    btnSuivant.addEventListener("click", next);
+    btnRejouer.addEventListener("click", resetQuiz);
+
+    // Démarrage
+    renderQuestion();
+  </script>
+</body>
+</html>
