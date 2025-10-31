@@ -61,31 +61,34 @@
   </div>
 
   <script>
-  // ===== Données du quiz (collées de ton JSON) =====
+  // ===== Données du quiz (2 faciles, 18 difficiles, arcs tous différents) =====
   const QUIZ = {
     "titre": "Grand Quiz One Piece - Niveau Légendaire",
-    "description": "Réponds aux 20 questions... seules les légendes du Nouveau Monde peuvent obtenir 20/20 !",
+    "description": "2 questions faciles pour s'échauffer, puis 18 difficiles — une par arc !",
     "questions": [
-      {"numero":1,"question":"Quel est le nom du fruit du démon de Luffy, selon sa véritable nature révélée à Wano ?","bonnes_reponses":["hito hito no mi","nika"],"correction":"C'était le Hito Hito no Mi, modèle Nika (Dieu du Soleil)."},
-      {"numero":2,"question":"Qui est le seul pirate connu à posséder deux fruits du démon ?","bonnes_reponses":["barbe noire","marshall d. teach"],"correction":"C'était Marshall D. Teach (Barbe Noire)."},
-      {"numero":3,"question":"Quel ancien vice-amiral est le père de Luffy ?","bonnes_reponses":["dragon","monkey d. dragon"],"correction":"C'était Monkey D. Dragon, chef de l'Armée Révolutionnaire."},
-      {"numero":4,"question":"Comment s'appelle la mer où Luffy a grandi ?","bonnes_reponses":["east blue"],"correction":"C'était East Blue."},
-      {"numero":5,"question":"Qui est la mère adoptive de Luffy ?","bonnes_reponses":["curly dadan","dadan"],"correction":"C'était Curly Dadan."},
-      {"numero":6,"question":"Quel est le vrai nom du Roi des Pirates ?","bonnes_reponses":["gol d. roger","gold roger","Gol D roger"],"correction":"C'était Gol D. Roger."},
-      {"numero":7,"question":"Quel personnage a construit le navire Oro Jackson ?","bonnes_reponses":["tom"],"correction":"C'était Tom, le charpentier de Water Seven."},
-      {"numero":8,"question":"Quelle est l'arme antique cachée à Alabasta ?","bonnes_reponses":["pluton"],"correction":"C'était Pluton."},
-      {"numero":9,"question":"Quelle est la capacité du fruit Yami Yami no Mi ?","bonnes_reponses":["ténèbres","tenebres","absorber"],"correction":"C'est le pouvoir des ténèbres, capable d'absorber toute chose."},
-      {"numero":10,"question":"Quel est le seul ancien amiral à avoir combattu Barbe Blanche en duel ? (1 réponse possible, 2 choix.)","bonnes_reponses":["sengoku","garp"],"correction":"C'était Garp et Sengoku ensemble à Marineford."},
-      {"numero":11,"question":"Quelle île a été détruite par un Buster Call en raison de ses recherches sur les Ponéglyphes ?","bonnes_reponses":["ohara"],"correction":"C'était Ohara, l'île natale de Nico Robin."},
-      {"numero":12,"question":"Quelle est la prime OU donne le nom de la plus élevée connue dans tout One Piece ?","bonnes_reponses":["gol d. roger","5","5564800000"],"correction":"Gol D. Roger : 5 564 800 000 berrys."},
-      {"numero":13,"question":"Qui est le père biologique de Yamato ?","bonnes_reponses":["kaido"],"correction":"C'était Kaido des Cent Bêtes."},
-      {"numero":14,"question":"Quelle est la capacité du fruit Gura Gura no Mi ?","bonnes_reponses":["tremblement","séisme","ondes de choc"],"correction":"Il permet de provoquer des tremblements de terre."},
-      {"numero":15,"question":"Qui a tué Portgas D. Ace ?","bonnes_reponses":["akainu","sakazuki"],"correction":"C'était Akainu (Sakazuki)."},
-      {"numero":16,"question":"Quel est le seul membre des Cinq Doyens à avoir révélé son nom complet ?","bonnes_reponses":["saint jaygarcia saturn","saturn"],"correction":"C'était Saint Jaygarcia Saturn."},
-      {"numero":17,"question":"Quelle est la capacité spéciale du fruit de Brook ?","bonnes_reponses":["revivre","âme","yomi yomi"],"correction":"C'était le Yomi Yomi no Mi, qui permet de revivre après la mort."},
-      {"numero":18,"question":"Qui a tué Kozuki Oden ?","bonnes_reponses":["kaido"],"correction":"C'était Kaido, avec l'aide d'Orochi."},
-      {"numero":19,"question":"Quelle est la véritable identité de Joy Boy ?","bonnes_reponses":["inconnue","mystère","luffy"],"correction":"Encore un mystère, mais lié à Luffy/Nika."},
-      {"numero":20,"question":"Quelle est la signification du D. dans les noms ?","bonnes_reponses":["ennemis des dieux","mystère","volonté du d"],"correction":"C'est lié à la Volonté du D. — les ennemis des dieux."}
+      // ————— FACILES —————
+      {"numero":1,"question":"(Syrup Village) Comment s'appelle le premier navire des Chapeaux de paille ?","bonnes_reponses":["going merry","merry"],"correction":"Le Going Merry, offert par Kaya lors de l'arc Syrup Village."},
+      {"numero":2,"question":"(Alabasta) Quel est le prénom de la princesse d'Alabasta ?","bonnes_reponses":["vivi","nefertari vivi","nefretari vivi"],"correction":"Nefertari Vivi, princesse d'Alabasta."},
+
+      // ————— DIFFICILES —————
+      {"numero":3,"question":"(Loguetown) Quel marchand d'épées vend à Zoro Yubashiri et Sandai Kitetsu ?","bonnes_reponses":["ipponmatsu"],"correction":"Ipponmatsu, le vendeur de Loguetown."},
+      {"numero":4,"question":"(Whiskey Peak) Combien de chasseurs de primes Zoro met-il K.O. à Whiskey Peak ?","bonnes_reponses":["100","cent"],"correction":"Zoro terrasse une centaine (≈100) de chasseurs de primes."},
+      {"numero":5,"question":"(Little Garden) Cite l'un des deux géants d'Elbaf présents sur l'île.","bonnes_reponses":["dorry","brogy"],"correction":"Dorry et Brogy, les deux guerriers d'Elbaf."},
+      {"numero":6,"question":"(Drum) Quel médecin a inspiré Chopper ?","bonnes_reponses":["hiriluk","dr hiriluk","docteur hiriluk"],"correction":"Le Dr Hiriluk, mentor de Chopper."},
+      {"numero":7,"question":"(Jaya) Comment s'appelle le descendant de Mont Blanc Noland vivant à Jaya ?","bonnes_reponses":["mont blanc cricket","cricket"],"correction":"Mont Blanc Cricket, chasseur de trésors à Mock Town."},
+      {"numero":8,"question":"(Skypiea) Comment s'appelle la cloche géante de Shandora ?","bonnes_reponses":["cloche d'or","golden bell","cloche dor"],"correction":"La cloche d'or de Shandora (Golden Bell)."},
+      {"numero":9,"question":"(Long Ring Long Land) Quel est le nom du rayon de Foxy qui ralentit ses adversaires ?","bonnes_reponses":["noro noro","noro noro beam","noro beam"],"correction":"Le Noro Noro Beam de Foxy."},
+      {"numero":10,"question":"(Water 7) Comment s'appelle la compagnie de charpentiers dirigée par Iceburg ?","bonnes_reponses":["galley-la","galley la","galley-la company","galley la company"],"correction":"La Galley-La Company."},
+      {"numero":11,"question":"(Enies Lobby) Quel ‘juge’ à trois têtes préside le tribunal ?","bonnes_reponses":["baskerville"],"correction":"Baskerville (en réalité trois personnes)."},
+      {"numero":12,"question":"(Thriller Bark) Quel est le nom du géant zombie n°900 ?","bonnes_reponses":["oars","oz","ors"],"correction":"Oars (parfois orthographié Oz)."},
+      {"numero":13,"question":"(Archipel Sabaody) Qui recouvre le Thousand Sunny pour aller sous l'eau ?","bonnes_reponses":["silvers rayleigh","rayleigh"],"correction":"Silvers Rayleigh réalise le coating."},
+      {"numero":14,"question":"(Amazon Lily) Comment s'appelle le serpent géant trône de Boa Hancock ?","bonnes_reponses":["salome","salomé"],"correction":"Salome, le serpent géant de Hancock."},
+      {"numero":15,"question":"(Impel Down) À quel niveau est emprisonné Jinbe lorsque Luffy l'y rencontre ?","bonnes_reponses":["6","niveau 6","level 6"],"correction":"Au niveau 6, le niveau des criminels légendaires."},
+      {"numero":16,"question":"(Retour à Sabaody) Quel est le nom du faux ‘Luffy’ qui dirige les Faux Chapeaux de paille ?","bonnes_reponses":["demaro black","demaro"],"correction":"Demaro Black se fait passer pour Luffy."},
+      {"numero":17,"question":"(Île des Hommes-Poissons) Comment s'appellent les pilules dopantes utilisées par les Nouveaux Hommes-Poissons ?","bonnes_reponses":["es","energy steroid","steroides energetiques","stéroïdes énergétiques","steroides"],"correction":"Les Energy Steroid, abrégées ES."},
+      {"numero":18,"question":"(Punk Hazard) Quel est le nom du gaz mortel libéré par César Clown ?","bonnes_reponses":["shinokuni"],"correction":"Shinokuni, l'‘Empire de la Mort’."},
+      {"numero":19,"question":"(Dressrosa) Quel est le vrai nom du soldat jouet ?","bonnes_reponses":["kyros"],"correction":"Kyros, ancien gladiateur légendaire."},
+      {"numero":20,"question":"(Zou) Quel est le nom du ‘Roi du Jour’ des Minks ?","bonnes_reponses":["inuarashi","duke dogstorm","dogstorm"],"correction":"Inuarashi (Duke Dogstorm), le Roi du Jour."}
     ]
   };
 
@@ -103,12 +106,11 @@
   // quelques alias automatiques usuels
   const canon = s => {
     s = norm(s);
-    // gold/gol
     if (s === "gold roger") s = "gol d. roger";
     if (s === "gol d roger" || s === "gol d roger") s = "gol d. roger";
     if (s === "marshall d teach") s = "marshall d. teach";
-    if (s === "curly dadan") s = "dadan"; // on accepte aussi "dadan"
-    if (s === "tenebres") s = "ténèbres"; // permet compatibilité réponses fournies
+    if (s === "curly dadan") s = "dadan";
+    if (s === "tenebres") s = "ténèbres";
     if (s === "yomi yomi no mi") s = "yomi yomi";
     if (s === "volonte du d") s = "volonté du d";
     return s;
@@ -138,7 +140,7 @@
     qnum.textContent = `Question ${i+1} / ${QUIZ.questions.length}`;
     q.textContent = item.question;
 
-    // petites "hints" (optionnel) : montres le nombre d'acceptations
+    // petites "hints" : montre le nombre d'acceptations
     hints.innerHTML = "";
     const nb = item.bonnes_reponses.length;
     const chip = document.createElement('span');
@@ -149,7 +151,6 @@
 
   function isCorrect(user, answers){
     const u = canon(user);
-    // accepte aussi si le user donne juste un nombre clé (ex: "5564800000" ou "5")
     for (const a of answers){
       if (canon(a) === u) return true;
     }
@@ -172,12 +173,10 @@
       score++;
       res.innerHTML = '<span class="good">✅ Correct !</span>';
     } else {
-      // affiche première bonne réponse en "canon", + correction texte
       const goodDisplay = item.bonnes_reponses[0];
       res.innerHTML = `<span class="bad">❌ Faux.</span> Bonne réponse acceptée : <strong>${goodDisplay}</strong><br><span class="muted">${item.correction||""}</span>`;
     }
 
-    // dernière ?
     btnSuivant.disabled = false;
     if (i === QUIZ.questions.length - 1){
       btnSuivant.textContent = "Voir le score";
@@ -195,7 +194,7 @@
   function showScore(){
     qnum.textContent = "Quiz terminé 🎉";
     q.textContent = QUIZ.titre;
-    res.innerHTML = `<span class="muted">${QUIZ.description}</span>`;
+    res.innerHTML = `<span class=\"muted\">${QUIZ.description}</span>`;
     scoreBox.style.display = "block";
     const pct = Math.round((score / QUIZ.questions.length) * 100);
     scoreBox.innerHTML = `<strong>Score :</strong> ${score} / ${QUIZ.questions.length} (${pct}%)<br>
@@ -214,13 +213,11 @@
     renderQuestion();
   }
 
-  // events
   btnValider.addEventListener('click', validate);
   btnSuivant.addEventListener('click', next);
   btnRejouer.addEventListener('click', resetQuiz);
   input.addEventListener('keydown', (e)=>{ if(e.key==='Enter') validate(); });
 
-  // start
   renderQuestion();
   </script>
 </body>
