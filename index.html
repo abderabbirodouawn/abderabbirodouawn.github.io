@@ -77,7 +77,7 @@
     .tag{padding:8px 12px;border-radius:999px;background:rgba(148,163,184,.12);border:1px solid var(--border);font-weight:600;display:inline-block;transition:transform .18s}
     .tag:hover{transform:scale(1.05)}
 
-    /* ✨ Nom stylé + hover */
+    /* ✨ Nom + titre en gradient animé (même taille) */
     .fancy-name{
       display:inline-block;
       background: linear-gradient(90deg,var(--brand),#8b5cf6,#22d3ee,#38bdf8,var(--brand));
@@ -88,7 +88,7 @@
       animation: sheen 6s ease-in-out infinite;
       text-shadow: 0 0 18px rgba(124,58,237,.25), 0 0 8px rgba(34,211,238,.15);
       position: relative;
-      white-space: nowrap;
+      white-space: normal; /* pour permettre le retour à la ligne */
       padding-bottom: 2px;
       transition: transform .2s, filter .2s, text-shadow .2s;
     }
@@ -145,14 +145,12 @@
     <section id="accueil" class="hero">
       <div>
         <span class="chip">Administrateur systèmes & réseaux</span>
+
+        <!-- ✅ Un seul H1, tout en gradient, même taille, pas de point -->
         <h1 class="title">
-        <h1 class="title same-size">
-          <span class="fancy-name">
-            Bonjour et bienvenue dans mon portfolio je suis
-          </span>
+          <span class="fancy-name">Bonjour et bienvenue dans mon portfolio, je suis Abderabbi Rodouawn</span>
         </h1>
-          <span class="fancy-name">Abderabbi Rodouawn</span>.
-        </h1>
+
         <p class="subtitle">Étudiant motivé basé à Paris, en recherche d’une <strong>alternance</strong> (3 jours en entreprise / 2 jours à l'école) pour <strong>1 an minimum</strong>.</p>
         <div class="cta">
           <a class="btn primary" id="email-btn">Écrire un email</a>
