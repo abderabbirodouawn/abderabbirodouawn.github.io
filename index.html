@@ -9,66 +9,86 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0b0f19;
-      --card: #111826;
-      --muted: #94a3b8;
-      --text: #e2e8f0;
-      --brand: #7c3aed;
-      --brand-2: #22d3ee;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    :root{
+      --bg: #0b0f19;         /* fond principal sombre */
+      --layer: #0e1525;      /* couche pour gradients */
+      --card: #111826;       /* cartes */
+      --muted: #94a3b8;      /* texte secondaire */
+      --text: #e2e8f0;       /* texte principal */
+      --brand: #7c3aed;      /* violet */
+      --brand-2: #22d3ee;    /* cyan */
+      --ring: rgba(124,58,237,.4);
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
       --radius: 18px;
     }
-    :root.light {
-      --bg: #f6f7fb;
-      --card: #ffffff;
-      --muted: #475569;
-      --text: #0f172a;
-      --brand: #6d28d9;
-      --brand-2: #0891b2;
-      --shadow: 0 12px 30px rgba(2,6,23,.08);
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1400px 700px at 75% -10%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(1000px 600px at -10% 10%, rgba(34,211,238,.16), transparent 60%),
+        linear-gradient(180deg, var(--layer), var(--bg));
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(1200px 600px at 80% -10%, rgba(124,58,237,.25), transparent 60%),
-                  radial-gradient(900px 500px at -10% 10%, rgba(34,211,238,.18), transparent 60%),
-                  var(--bg);
-      color: var(--text);
-    }
-    a { color: inherit; text-decoration: none; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
-    header {
-      position: sticky; top: 0; z-index: 40; backdrop-filter: saturate(140%) blur(8px);
-      background: linear-gradient(to bottom, rgba(11,15,25,.85), rgba(11,15,25,.55));
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1100px; margin:0 auto; padding:24px}
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: saturate(160%) blur(10px);
+      background: linear-gradient(to bottom, rgba(8,12,20,.85), rgba(8,12,20,.55));
       border-bottom: 1px solid rgba(148,163,184,.15);
     }
-    .nav { display: flex; align-items: center; justify-content: space-between; }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; }
-    .brand .logo { width: 34px; height: 34px; border-radius: 10px; background:
-      conic-gradient(from 180deg, var(--brand), var(--brand-2)); box-shadow: var(--shadow); }
-    .nav a { padding: 10px 14px; border-radius: 12px; font-weight: 600; opacity: .88; }
-    .nav a:hover { background: rgba(124,58,237,.12); }
-    .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: center; padding: 48px 0; }
-    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; text-align: center; } }
-    .title { font-size: clamp(34px, 5vw, 56px); margin: 8px 0 16px; }
-    .subtitle { font-size: clamp(16px, 2vw, 18px); color: var(--muted); }
-    .btn { display: inline-flex; align-items: center; padding: 12px 16px; border-radius: 14px; font-weight: 700; border: 1px solid rgba(148,163,184,.25); background: var(--card); color: var(--text); margin-right: 10px; }
-    .btn.primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); border: none; color: white; }
-    .btn:hover { transform: translateY(-1px); }
-    .card { background: var(--card); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
-    section { padding: 42px 0; }
-    h2 { font-size: 28px; margin-bottom: 20px; }
-    details summary { cursor: pointer; margin-top: 10px; font-weight: bold; color: var(--brand); }
-    footer { padding: 30px; text-align: center; color: var(--muted); }
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px}
+    .logo{width:34px; height:34px; border-radius:10px; background: conic-gradient(from 180deg, var(--brand), var(--brand-2)); box-shadow: var(--shadow)}
+    .links a{opacity:.9; font-weight:600; padding:10px 14px; border-radius:12px}
+    .links a:hover{background: rgba(124,58,237,.12); box-shadow: inset 0 0 0 1px rgba(124,58,237,.25)}
+    .switch{border:1px solid rgba(148,163,184,.25); background:rgba(2,6,23,.35); padding:8px 12px; border-radius:999px; font-weight:700}
+    section{padding:42px 0}
+    .chip{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; background: rgba(124,58,237,.10); border:1px solid rgba(124,58,237,.25); border-radius:999px; font-weight:700}
+    .hero{display:grid; grid-template-columns: 1.2fr 1fr; gap:28px; align-items:center; padding:48px 0 24px}
+    @media (max-width: 900px){ .hero{grid-template-columns:1fr; text-align:center} }
+    .title{font-size: clamp(36px, 5vw, 64px); line-height:1.05; margin:8px 0 16px; letter-spacing:-.02em}
+    .subtitle{font-size: clamp(16px, 2.2vw, 18px); color:var(--muted)}
+    .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; font-weight:700; cursor:pointer; border:1px solid rgba(148,163,184,.25); background: var(--card); color:var(--text); box-shadow:var(--shadow)}
+    .btn.primary{background: linear-gradient(135deg, var(--brand), var(--brand-2)); border:none}
+    .btn:hover{transform: translateY(-1px)}
+    .divider{height:1px; background: linear-gradient(90deg, transparent, rgba(148,163,184,.25), transparent); margin:32px 0}
+    .kpis{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
+    .kpi{padding:16px; border-radius:16px; background: linear-gradient(180deg, rgba(124,58,237,.12), rgba(34,211,238,.10)); border:1px dashed rgba(124,58,237,.35); text-align:center}
+    .kpi strong{font-size:22px}
+    .card{background: var(--card); border:1px solid rgba(148,163,184,.15); border-radius: var(--radius); padding:20px; box-shadow: var(--shadow)}
+    .list{display:flex; flex-wrap:wrap; gap:10px}
+    .pill{border:1px solid rgba(148,163,184,.25); background: rgba(148,163,184,.12); padding:8px 12px; border-radius: 12px; display:inline-flex; gap:8px; align-items:center}
+    .muted{color:var(--muted)}
+    .small{font-size:14px}
+    h2{font-size: clamp(22px, 2.6vw, 30px); margin:0 0 18px}
+    .grid{display:grid; gap:18px}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    @media (max-width:900px){ .grid.cols-2{grid-template-columns:1fr} }
+    .tag{padding:8px 12px; border-radius:999px; background: rgba(148,163,184,.12); border:1px solid rgba(148,163,184,.25); font-weight:600}
+    .project{display:grid; grid-template-columns: 1fr .6fr; gap:16px; align-items:center}
+    .project .cover{height:180px; border-radius:14px; background:
+        radial-gradient(240px 120px at 20% 20%, rgba(124,58,237,.35), transparent 60%),
+        radial-gradient(200px 160px at 80% 60%, rgba(34,211,238,.25), transparent 60%),
+        #0f172a; border:1px solid rgba(148,163,184,.2); display:flex; align-items:center; justify-content:center}
+    .project pre{background:#0b1220; color:#cbd5e1; padding:12px; border-radius:12px; overflow:auto; border:1px solid rgba(148,163,184,.15)}
+    details summary{cursor:pointer; font-weight:700; color:var(--text)}
+    details summary strong{color:var(--brand)}
+    .timeline{position:relative; padding-left:18px}
+    .timeline::before{content:""; position:absolute; left:7px; top:4px; bottom:4px; width:2px; background: linear-gradient(var(--brand), var(--brand-2)); border-radius:2px}
+    .t-item{position:relative; margin-left:10px; margin-bottom:16px}
+    .t-item::before{content:""; position:absolute; left:-18px; top:8px; width:12px; height:12px; background: var(--bg); border:2px solid var(--brand); border-radius:999px; box-shadow:0 0 0 3px rgba(124,58,237,.15)}
+    footer{padding:38px 0 60px; color:var(--muted); text-align:center}
   </style>
 </head>
 <body>
   <header>
     <div class="container nav">
-      <div class="brand"><div class="logo"></div><span>Rodouawn A.</span></div>
-      <nav>
+      <div class="brand"><div class="logo" aria-hidden="true"></div> <span>Rodouawn A.</span></div>
+      <nav class="links" aria-label="Navigation principale">
         <a href="#accueil">Accueil</a>
         <a href="#projets">Projets</a>
         <a href="#competences">Compétences</a>
@@ -76,90 +96,283 @@
         <a href="#formations">Formations</a>
         <a href="#contact">Contact</a>
       </nav>
-      <button id="theme" class="btn">Mode</button>
+      <button id="theme" class="switch" aria-label="Basculer le thème">Mode</button>
     </div>
   </header>
 
   <main class="container">
+    <!-- HERO -->
     <section id="accueil" class="hero">
       <div>
         <span class="chip">Administrateur systèmes & réseaux</span>
-        <h1 class="title"><span style="background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;color:transparent;">Abderabbi Rodouawn</span></h1>
-        <p class="subtitle">Étudiant motivé basé à Paris, en recherche d’une alternance (3 jours en entreprise / 2 jours à l'école) pour 6 à 9 mois, disponible immédiatement.</p>
-        <a class="btn primary" href="#contact">Me contacter</a>
-        <a class="btn" href="https://abderabbirodouawn.github.io/" target="_blank">Mon GitHub Pages</a>
-        <a class="btn" href="https://www.linkedin.com/in/rodouawn-abderabbi" target="_blank">LinkedIn</a>
+        <h1 class="title">Bonjour, je suis <span style="background:linear-gradient(90deg,var(--brand),var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent;">Abderabbi Rodouawn</span>.</h1>
+        <p class="subtitle">Étudiant motivé basé à Paris, en recherche d’une <strong>alternance</strong> (3 jours en entreprise / 2 jours à l'école) pour <strong>6 à 9 mois</strong>, disponible immédiatement. Permis B (véhiculé).</p>
+        <div class="cta">
+          <a class="btn primary" href="#contact">Me contacter</a>
+          <a class="btn" href="https://abderabbirodouawn.github.io/" target="_blank" rel="noopener">Mon GitHub Pages</a>
+          <a class="btn" href="https://www.linkedin.com/in/rodouawn-abderabbi" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <div class="divider"></div>
+        <div class="kpis">
+          <div class="kpi"><strong>Python</strong><div class="muted small">Scripts & CLI</div></div>
+          <div class="kpi"><strong>Réseaux</strong><div class="muted small">Cisco • GNS3 • TCP/IP</div></div>
+          <div class="kpi"><strong>Linux</strong><div class="muted small">Shell • Outils admin</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Profil rapide</h3>
+        <div class="list">
+          <span class="pill">📍 Paris</span>
+          <span class="pill">📧 <a href="mailto:abderabbi.rodouawn@gmail.com">abderabbi.rodouawn@gmail.com</a></span>
+          <span class="pill">🚗 Permis B</span>
+          <span class="pill">💬 Français (native), Anglais (B2), Arabe (dialecte)</span>
+          <span class="pill">🎯 Objectif: Alternance Systèmes & Réseaux</span>
+        </div>
+        <div class="divider"></div>
+        <p class="small muted">Centres d'intérêt : Padel • Voyages • Cuisine</p>
       </div>
     </section>
 
+    <!-- PROJETS -->
     <section id="projets">
       <h2>Projets informatiques</h2>
-      <div class="card">
-        <h3>Quizzfly — Jeu de Quiz en ligne de commande</h3>
-        <p>Lecture des questions depuis un CSV/JSON, validation des réponses et score final.</p>
-        <details><summary>Détails</summary>
-          <ul>
-            <li>Timer par question et bonus de série correcte.</li>
-            <li>Sauvegarde des scores JSON.</li>
-          </ul>
-        </details>
-      </div>
+      <div class="grid cols-2">
+        <!-- Quizzfly -->
+        <article class="card project">
+          <div>
+            <h3 style="margin:0 0 6px">Quizzfly — Jeu de Quiz en ligne de commande</h3>
+            <p class="muted">Lecture des questions depuis un CSV/JSON, validation des réponses et score final. Approfondissement Python (fichiers, boucles, conditions, fonctions).</p>
+            <div class="list" style="margin:10px 0 12px">
+              <span class="tag">Python</span>
+              <span class="tag">CSV / JSON</span>
+              <span class="tag">Linux</span>
+              <span class="tag">VS Code</span>
+            </div>
+            <details>
+              <summary><strong>Détails</strong></summary>
+              <ul>
+                <li>Timer par question et bonus de série correcte.</li>
+                <li>Banque de questions modulaire (par thèmes) + mélange aléatoire.</li>
+                <li>Sauvegarde des scores en JSON (tableau des meilleurs scores).</li>
+                <li>Packaging CLI <code>quizzfly</code> (exécutable) et tests unitaires basiques.</li>
+              </ul>
+            </details>
+            <pre><code># Exemple: lecture CSV → questions
+import csv, random
+with open('questions.csv', newline='') as f:
+    bank = list(csv.DictReader(f))
+random.shuffle(bank)
+score = sum(q['answer'] == input(q['question']+" → ") for q in bank[:10])
+print(f"Score: {score}/10")</code></pre>
+          </div>
+          <div class="cover" aria-hidden="true"><span class="muted">CLI • Scoring • CSV</span></div>
+        </article>
 
-      <div class="card">
-        <h3>Implémentation d’un LAN multi-machines</h3>
-        <p>Adressage IP, configuration d’interfaces, tests de connectivité, partage de fichiers.</p>
-        <details><summary>Détails</summary>
-          <ul>
-            <li>VLAN, DHCP, ACLs, supervision.</li>
-          </ul>
-        </details>
+        <!-- LAN multi-machines -->
+        <article class="card project">
+          <div>
+            <h3 style="margin:0 0 6px">Implémentation d’un LAN multi-machines</h3>
+            <p class="muted">Adressage IP, configuration d’interfaces, tests de connectivité (<code>ping</code>, <code>traceroute</code>), partage de fichiers, routeur & switch basiques.</p>
+            <div class="list" style="margin:10px 0 12px">
+              <span class="tag">Cisco</span>
+              <span class="tag">GNS3</span>
+              <span class="tag">Windows</span>
+              <span class="tag">TCP/IP</span>
+            </div>
+            <details>
+              <summary><strong>Détails</strong></summary>
+              <ul>
+                <li>Plan d’adressage VLSM, VLANs, et segmentation par services.</li>
+                <li>DHCP, DNS local, et ACLs simples sur le routeur.</li>
+                <li>Supervision ICMP/HTTP avec scripts Python (<em>health checks</em>).</li>
+              </ul>
+            </details>
+            <pre><code># Exemple: health check simple
+import subprocess, time
+HOSTS = ["192.168.10.1", "192.168.10.10"]
+while True:
+    for h in HOSTS:
+        ok = subprocess.call(["ping", "-c", "1", h], stdout=subprocess.DEVNULL)==0
+        print(time.strftime('%H:%M:%S'), h, "UP" if ok else "DOWN")
+    time.sleep(30)</code></pre>
+          </div>
+          <div class="cover" aria-hidden="true"><span class="muted">VLAN • ACL • DHCP/DNS</span></div>
+        </article>
+
+        <!-- GNS3 petite entreprise -->
+        <article class="card project">
+          <div>
+            <h3 style="margin:0 0 6px">GNS3 — Petit réseau d’entreprise (Cisco)</h3>
+            <p class="muted">Plan d’adressage, configuration interfaces, paramétrage routeur/switch, tests de connectivité & compréhension des échanges LAN.</p>
+            <div class="list" style="margin:10px 0 12px">
+              <span class="tag">Cisco</span>
+              <span class="tag">GNS3</span>
+              <span class="tag">TCP/IP</span>
+              <span class="tag">Switch/Routeur</span>
+            </div>
+            <details>
+              <summary><strong>Détails</strong></summary>
+              <ul>
+                <li>Trunking 802.1Q, Spanning-Tree, EtherChannel.</li>
+                <li>Routage statique vs OSPF à aire unique.</li>
+                <li>Syslog & NTP pour l’observabilité de base.</li>
+              </ul>
+            </details>
+            <pre><code>! Extrait de config (Cisco IOS)
+conf t
+hostname R1
+interface g0/0
+ description LAN-Admin
+ ip address 192.168.10.1 255.255.255.0
+ no shut
+exit
+router ospf 1
+ network 192.168.10.0 0.0.0.255 area 0
+end
+wr</code></pre>
+          </div>
+          <div class="cover" aria-hidden="true"><span class="muted">OSPF • STP • Syslog</span></div>
+        </article>
+
+        <!-- Bonus: Mini-outil GLPI/Helpdesk -->
+        <article class="card project">
+          <div>
+            <h3 style="margin:0 0 6px">Mini-outil Helpdesk (GLPI-like)</h3>
+            <p class="muted">Prototype de suivi tickets en ligne de commande : création, affectation, statut, export CSV — pour illustrer la logique ITSM.</p>
+            <div class="list" style="margin:10px 0 12px">
+              <span class="tag">Python</span>
+              <span class="tag">CSV</span>
+              <span class="tag">Shell</span>
+            </div>
+            <details>
+              <summary><strong>Détails</strong></summary>
+              <ul>
+                <li>API REST Flask + stockage SQLite.</li>
+                <li>Tableau de bord web minimal (HTML/CSS/JS).</li>
+              </ul>
+            </details>
+            <pre><code># ticket.py — flux minimal
+tickets = []
+def new(title, owner):
+    tickets.append({"id": len(tickets)+1, "title": title, "owner": owner, "status": "open"})
+    return tickets[-1]
+</code></pre>
+          </div>
+          <div class="cover" aria-hidden="true"><span class="muted">ITSM • CLI • CSV</span></div>
+        </article>
       </div>
     </section>
 
+    <!-- COMPETENCES -->
     <section id="competences">
       <h2>Compétences</h2>
       <div class="card">
-        <p>Python • Linux/Unix • Cisco/GNS3 • TCP/IP • GLPI</p>
+        <div class="list">
+          <span class="tag">Python</span>
+          <span class="tag">Linux / Unix</span>
+          <span class="tag">Cisco / GNS3</span>
+          <span class="tag">Réseaux TCP/IP</span>
+          <span class="tag">Configuration IP</span>
+          <span class="tag">GLPI</span>
+        </div>
+        <div class="divider"></div>
+        <p class="muted small">Outils : VS Code, Shell, ipconfig/nslookup, ping/traceroute. Méthodes : tests, documentation, veille, rigueur opérationnelle.</p>
       </div>
     </section>
 
+    <!-- EXPERIENCES -->
     <section id="experiences">
       <h2>Expériences professionnelles</h2>
-      <div class="card">
-        <strong>Assistant d'éducation</strong> — Lycée Adolphe Chérioux (2022–2023)<br>
-        <strong>Opérateur en télésurveillance</strong> — Stanley Black & Decker (2022)
+      <div class="card timeline">
+        <div class="t-item">
+          <strong>Assistant d'éducation (AED)</strong> — Lycée Adolphe Chérioux, Vitry-sur-Seine
+          <div class="muted small">oct. 2022 → juil. 2023</div>
+          <ul class="small">
+            <li>Gestion et coordination quotidiennes pour un environnement sécurisé.</li>
+            <li>Collaboration avec équipes pédagogiques & administratives.</li>
+          </ul>
+        </div>
+        <div class="t-item">
+          <strong>Opérateur en télésurveillance</strong> — Stanley Black & Decker (Ivry-sur-Seine)
+          <div class="muted small">mars 2022 → juin 2022</div>
+          <ul class="small">
+            <li>Surveillance temps réel et détection d’incidents de sécurité.</li>
+            <li>Analyse et traitement des alertes issues des systèmes de télésurveillance.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
+    <!-- FORMATIONS -->
     <section id="formations">
       <h2>Formations</h2>
-      <div class="card">
-        <p>🎓 Bac+2 — Chargé de projets informatiques, ETNA (2025–2026)<br>
-        🎓 Prépa Systèmes & Réseaux — Studi (2024–2025)<br>
-        🎓 Bac Technicien installateur système énergétique & climatique — Lycée Chérioux (2018)</p>
+      <div class="card timeline">
+        <div class="t-item">
+          <strong>Bac +2 — Chargé de projets informatiques</strong> — ETNA (Ivry-sur-Seine)
+          <div class="muted small">oct. 2025 → juil. 2026</div>
+        </div>
+        <div class="t-item">
+          <strong>Prépa — Technicien Supérieur Systèmes & Réseaux</strong> — Studi
+          <div class="muted small">oct. 2024 → mars 2025</div>
+        </div>
+        <div class="t-item">
+          <strong>Baccalauréat — Technicien installateur système énergétique & climatique</strong> — Lycée Adolphe Chérioux
+          <div class="muted small">janv. 2018</div>
+        </div>
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact">
       <h2>Contact</h2>
-      <div class="card">
-        <p>📧 <a href="mailto:abderabbi.rodouawn@gmail.com">abderabbi.rodouawn@gmail.com</a><br>
-        🌍 Paris, Île-de-France<br>
-        🔗 <a href="https://www.linkedin.com/in/rodouawn-abderabbi" target="_blank">LinkedIn</a></p>
+      <div class="grid cols-2">
+        <div class="card">
+          <p>Vous souhaitez en savoir plus ou me proposer une alternance ?</p>
+          <div class="list" style="margin-top:10px">
+            <a class="btn primary" href="mailto:abderabbi.rodouawn@gmail.com">Écrire un email</a>
+            <a class="btn" href="https://www.linkedin.com/in/rodouawn-abderabbi" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="https://abderabbirodouawn.github.io/" target="_blank" rel="noopener">Portfolio GitHub</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Informations</h3>
+          <ul class="small">
+            <li>Localisation : Paris (Île-de-France)</li>
+            <li>Disponibilité : immédiate • alternance 6–9 mois • 3j entreprise / 2j école</li>
+            <li>Langues : Français (maternelle), Anglais (B2), Arabe (dialecte)</li>
+            <li>Permis B — véhiculé</li>
+          </ul>
+        </div>
       </div>
     </section>
+
+    <footer>
+      © <span id="year"></span> Abderabbi Rodouawn — Fait avec ❤️ et un peu de <code>HTML/CSS/JS</code>.
+    </footer>
   </main>
 
-  <footer>
-    © <span id="year"></span> Abderabbi Rodouawn — Fait avec ❤️ en HTML/CSS/JS
-  </footer>
-
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-    const key='theme:light', root=document.documentElement;
-    const apply=()=>root.classList.toggle('light',localStorage.getItem(key)==='1');
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id.length > 1) {
+          e.preventDefault();
+          document.querySelector(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+    // Theme toggle (persist)
+    const root = document.documentElement;
+    const key = 'theme:light';
+    const apply = () => root.classList.toggle('light', localStorage.getItem(key) === '1');
     apply();
-    document.getElementById('theme').onclick=()=>{localStorage.setItem(key,localStorage.getItem(key)==='1'?'0':'1');apply();}
+    document.getElementById('theme').addEventListener('click', () => {
+      const v = localStorage.getItem(key) === '1' ? '0' : '1';
+      localStorage.setItem(key, v); apply();
+    });
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
