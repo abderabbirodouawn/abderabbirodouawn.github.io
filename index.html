@@ -3,11 +3,34 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Abderabbi Rodouawn — Portfolio</title>
-  <meta name="description" content="Portfolio d'Abderabbi Rodouawn — Administrateur systèmes & réseaux. Projets, compétences, expériences et contact." />
+  <title>Abderabbi Rodouawn — Administrateur Systèmes & Réseaux | Portfolio</title>
+  <meta name="description" content="Portfolio d'Abderabbi Rodouawn, Administrateur systèmes & réseaux. En recherche d'alternance (3j/2j) pour 1 an minimum. Projets GNS3, Python, réseau LAN. Paris, Île-de-France." />
+  <meta name="author" content="Abderabbi Rodouawn" />
+  <meta name="keywords" content="Administrateur systèmes, réseaux, alternance, Python, Cisco, GNS3, TCP/IP, Linux, Paris" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://abderabbirodouawn.github.io/" />
+  <meta property="og:title" content="Abderabbi Rodouawn — Administrateur Systèmes & Réseaux" />
+  <meta property="og:description" content="Portfolio professionnel — En recherche d'alternance (3j/2j) en administration systèmes & réseaux. Compétences : Python, Cisco, GNS3, Linux, TCP/IP." />
+  <meta property="og:image" content="https://abderabbirodouawn.github.io/og-image.png" />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://abderabbirodouawn.github.io/" />
+  <meta property="twitter:title" content="Abderabbi Rodouawn — Portfolio" />
+  <meta property="twitter:description" content="Administrateur systèmes & réseaux en recherche d'alternance" />
+  <meta property="twitter:image" content="https://abderabbirodouawn.github.io/og-image.png" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <style>
     :root{
       /* 🌙 Thème nuit (par défaut) */
@@ -18,6 +41,7 @@
       --text: #e2e8f0;
       --brand: #7c3aed;
       --brand-2: #22d3ee;
+      --accent: #10b981;
       --border: rgba(148,163,184,.15);
       --shadow: 0 12px 30px rgba(0,0,0,.35);
       --hover: rgba(124,58,237,.12);
@@ -31,12 +55,14 @@
       --text: #0f172a;
       --brand: #6366f1;
       --brand-2: #06b6d4;
+      --accent: #059669;
       --border: rgba(2,6,23,.08);
       --shadow: 0 10px 26px rgba(2,6,23,.08);
       --hover: rgba(99,102,241,.08);
     }
 
     *{box-sizing:border-box; transition: background-color .25s, color .25s, border-color .25s}
+    html{scroll-behavior:smooth}
     html,body{height:100%; margin:0; font-family:Inter,system-ui,sans-serif; color:var(--text); background:linear-gradient(180deg,var(--layer),var(--bg)); overflow-x:hidden;}
     a{color:inherit;text-decoration:none}
 
@@ -46,38 +72,79 @@
     .container{max-width:1100px;margin:0 auto;padding:24px;position:relative;z-index:1}
     header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(10px);background:linear-gradient(to bottom,rgba(8,12,20,.85),rgba(8,12,20,.55));border-bottom:1px solid var(--border);}
     :root.light header{background:linear-gradient(to bottom,rgba(255,255,255,.9),rgba(255,255,255,.8));}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
     .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
     .logo{width:34px;height:34px;border-radius:10px;background:conic-gradient(from 180deg,var(--brand),var(--brand-2));box-shadow:var(--shadow)}
+    .links{display:flex;gap:4px;flex-wrap:wrap}
     .links a{opacity:.9;font-weight:600;padding:10px 14px;border-radius:12px;display:inline-block;transition:transform .18s}
     .links a:hover{background:var(--hover);transform:scale(1.04)}
-    .switch{border:1px solid var(--border);background:var(--card);padding:8px 12px;border-radius:999px;font-weight:700;transition:transform .18s}
+    .switch{border:1px solid var(--border);background:var(--card);padding:8px 12px;border-radius:999px;font-weight:700;transition:transform .18s;cursor:pointer}
     .switch:hover{transform:scale(1.05)}
 
+    /* Badge disponible */
+    .badge-dispo{
+      position:fixed;
+      top:80px;
+      right:20px;
+      z-index:100;
+      background:linear-gradient(135deg,var(--accent),#34d399);
+      color:white;
+      padding:10px 16px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:14px;
+      box-shadow:0 8px 20px rgba(16,185,129,.3);
+      animation:pulse-badge 2s ease-in-out infinite;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .badge-dispo::before{
+      content:"";
+      width:8px;
+      height:8px;
+      background:#fff;
+      border-radius:50%;
+      animation:blink 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse-badge{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.05)}
+    }
+    @keyframes blink{
+      0%,100%{opacity:1}
+      50%{opacity:.4}
+    }
+    @media(max-width:900px){.badge-dispo{top:60px;right:10px;font-size:12px;padding:8px 12px}}
+
     section{padding:42px 0}
-    .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(124,58,237,.10);border:1px solid var(--border);border-radius:999px;font-weight:700}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(124,58,237,.10);border:1px solid var(--border);border-radius:999px;font-weight:700;font-size:14px}
     .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;padding:48px 0 24px}
     @media(max-width:900px){.hero{grid-template-columns:1fr;text-align:center}}
     .title{font-size:clamp(36px,5vw,64px);line-height:1.05;margin:8px 0 16px}
-    .subtitle{font-size:clamp(16px,2.2vw,18px);color:var(--muted)}
+    .subtitle{font-size:clamp(16px,2.2vw,18px);color:var(--muted);line-height:1.6}
     .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--text);box-shadow:var(--shadow);transition:transform .18s}
+    @media(max-width:900px){.cta{justify-content:center}}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--text);box-shadow:var(--shadow);transition:transform .18s;font-size:15px}
     .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none;color:white}
+    .btn.secondary{background:linear-gradient(135deg,var(--accent),#34d399);border:none;color:white}
     .btn:hover{transform:scale(1.04)}
+    .btn svg{width:18px;height:18px}
     .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;box-shadow:var(--shadow);transition:transform .18s}
     .card:hover{transform:translateY(-2px) scale(1.02)}
     .muted{color:var(--muted)}.small{font-size:14px}
-    .grid{display:grid;gap:18px}.grid.cols-2{grid-template-columns:repeat(2,1fr)}
-    @media(max-width:900px){.grid.cols-2{grid-template-columns:1fr}}
+    .grid{display:grid;gap:18px}.grid.cols-2{grid-template-columns:repeat(2,1fr)}.grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    @media(max-width:900px){.grid.cols-2,.grid.cols-3{grid-template-columns:1fr}}
     h2{font-size:clamp(22px,2.6vw,30px);margin:0 0 18px}
-    footer{text-align:center;color:var(--muted);padding:40px 0 60px}
+    h3{font-size:clamp(18px,2vw,22px);margin:0 0 10px}
+    footer{text-align:center;color:var(--muted);padding:40px 0 60px;font-size:14px}
 
     /* Tags */
     .tags{display:flex;flex-wrap:wrap;gap:10px}
-    .tag{padding:8px 12px;border-radius:999px;background:rgba(148,163,184,.12);border:1px solid var(--border);font-weight:600;display:inline-block;transition:transform .18s}
+    .tag{padding:8px 12px;border-radius:999px;background:rgba(148,163,184,.12);border:1px solid var(--border);font-weight:600;display:inline-block;transition:transform .18s;font-size:13px}
     .tag:hover{transform:scale(1.05)}
 
-    /* ✨ Nom + titre en gradient animé (même taille) */
+    /* ✨ Nom + titre en gradient animé */
     .fancy-name{
       display:inline-block;
       background: linear-gradient(90deg,var(--brand),#8b5cf6,#22d3ee,#38bdf8,var(--brand));
@@ -88,7 +155,7 @@
       animation: sheen 6s ease-in-out infinite;
       text-shadow: 0 0 18px rgba(124,58,237,.25), 0 0 8px rgba(34,211,238,.15);
       position: relative;
-      white-space: normal; /* pour permettre le retour à la ligne */
+      white-space: normal;
       padding-bottom: 2px;
       transition: transform .2s, filter .2s, text-shadow .2s;
     }
@@ -120,23 +187,66 @@
     }
     .profile-pic:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(34,211,238,.4),0 0 80px rgba(124,58,237,.25)}
     @media(max-width:900px){.photo-wrapper{margin-top:24px}.profile-pic{width:200px;height:200px}}
+
+    /* Section À propos */
+    .about-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start}
+    @media(max-width:900px){.about-grid{grid-template-columns:1fr}}
+    .about-text{line-height:1.7}
+    .stats{display:flex;flex-direction:column;gap:12px}
+    .stat-item{background:rgba(124,58,237,.08);padding:14px;border-radius:12px;border:1px solid var(--border)}
+    .stat-value{font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .stat-label{font-size:13px;color:var(--muted);margin-top:4px}
+
+    /* Timeline formations */
+    .timeline{position:relative;padding-left:30px}
+    .timeline::before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--brand),var(--brand-2))}
+    .timeline-item{position:relative;margin-bottom:24px}
+    .timeline-item::before{content:"";position:absolute;left:-26px;top:4px;width:12px;height:12px;background:var(--brand);border-radius:50%;border:2px solid var(--card);box-shadow:0 0 0 3px var(--border)}
+    .timeline-date{font-size:13px;color:var(--brand);font-weight:700;margin-bottom:4px}
+    .timeline-title{font-weight:700;margin-bottom:4px}
+
+    /* Projets avec liens GitHub */
+    .project-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;gap:12px}
+    .project-links{display:flex;gap:8px}
+    .icon-btn{padding:6px 10px;background:rgba(124,58,237,.1);border:1px solid var(--border);border-radius:8px;transition:all .18s;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600}
+    .icon-btn:hover{background:rgba(124,58,237,.2);transform:scale(1.05)}
+    .icon-btn svg{width:16px;height:16px}
+
+    /* Certifications */
+    .cert-badge{background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(34,211,238,.15));padding:12px 16px;border-radius:12px;border:1px solid var(--border);display:flex;align-items:center;gap:12px;transition:transform .18s}
+    .cert-badge:hover{transform:scale(1.02)}
+    .cert-icon{width:40px;height:40px;background:var(--brand);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:18px}
+    .cert-info{flex:1}
+    .cert-name{font-weight:700;margin-bottom:2px}
+    .cert-org{font-size:13px;color:var(--muted)}
   </style>
 </head>
 <body>
   <canvas id="tech-bg"></canvas>
 
+  <!-- Badge disponible flottant -->
+  <div class="badge-dispo" role="status" aria-label="Disponible pour alternance">
+    Disponible pour alternance
+  </div>
+
   <header>
     <div class="container nav">
-      <div class="brand"><div class="logo"></div><span>Rodouawn A.</span></div>
-      <nav class="links">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span>Rodouawn A.</span>
+      </div>
+      <nav class="links" role="navigation" aria-label="Navigation principale">
         <a href="#accueil">Accueil</a>
+        <a href="#apropos">À propos</a>
         <a href="#projets">Projets</a>
         <a href="#competences">Compétences</a>
         <a href="#experiences">Expériences</a>
         <a href="#formations">Formations</a>
         <a href="#contact">Contact</a>
       </nav>
-      <button id="theme" class="switch">Mode</button>
+      <button id="theme" class="switch" aria-label="Changer le thème">
+        <span id="theme-text">Mode</span>
+      </button>
     </div>
   </header>
 
@@ -144,23 +254,83 @@
     <!-- HERO -->
     <section id="accueil" class="hero">
       <div>
-        <span class="chip">Administrateur systèmes & réseaux</span>
+        <span class="chip">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg>
+          Administrateur systèmes & réseaux
+        </span>
 
-        <!-- ✅ Un seul H1, tout en gradient, même taille, pas de point -->
         <h1 class="title">
-          <span class="fancy-name">Bienvenue dans mon portfolio, je suis Abderabbi Rodouawn</span>
+          <span class="fancy-name">Bonjour et bienvenue dans mon portfolio, je suis Abderabbi Rodouawn</span>
         </h1>
 
-        <p class="subtitle">Étudiant motivé basé à Paris, en recherche d’une <strong>alternance</strong> (3 jours en entreprise / 2 jours à l'école) pour <strong>1 an minimum</strong>.</p>
+        <p class="subtitle">Étudiant motivé basé à <strong>Paris</strong>, en recherche active d'une <strong>alternance</strong> (3 jours en entreprise / 2 jours à l'école) pour <strong>1 an minimum</strong>. Passionné par les réseaux, la sécurité et l'automatisation.</p>
+        
         <div class="cta">
-          <a class="btn primary" id="email-btn">Écrire un email</a>
-          <a class="btn" href="https://www.linkedin.com/in/rodouawn-abderabbi" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn primary" id="email-btn" aria-label="M'envoyer un email">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+            </svg>
+            Écrire un email
+          </a>
+          <a class="btn secondary" href="#" id="cv-btn" aria-label="Télécharger mon CV">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+            </svg>
+            Télécharger CV
+          </a>
+          <a class="btn" href="https://www.linkedin.com/in/rodouawn-abderabbi" target="_blank" rel="noopener noreferrer" aria-label="Voir mon profil LinkedIn">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+            </svg>
+            LinkedIn
+          </a>
+          <a class="btn" href="https://abderabbirodouawn.github.io/" target="_blank" rel="noopener noreferrer" aria-label="Voir mon GitHub Pages">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            GitHub
+          </a>
         </div>
       </div>
 
       <!-- 📸 Photo à droite du texte -->
       <div class="photo-wrapper">
-        <img src="profile.png" alt="Photo de profil d'Abderabbi Rodouawn" class="profile-pic">
+        <img src="profile.png" alt="Photo de profil d'Abderabbi Rodouawn" class="profile-pic" loading="lazy">
+      </div>
+    </section>
+
+    <!-- À PROPOS -->
+    <section id="apropos">
+      <h2>À propos de moi</h2>
+      <div class="card">
+        <div class="about-grid">
+          <div class="about-text">
+            <p>Passionné par l'informatique et les technologies réseau depuis toujours, j'ai décidé de me reconvertir dans le domaine après plusieurs années d'expérience professionnelle. Mon parcours atypique m'a appris la rigueur, l'organisation et le travail en équipe.</p>
+            <p>Aujourd'hui, je me forme activement en administration systèmes et réseaux à l'ETNA. Je cherche une entreprise pour m'accompagner dans mon alternance et mettre en pratique mes compétences en environnement professionnel réel.</p>
+            <p>Mon objectif : devenir un expert en infrastructure IT, capable de gérer des environnements complexes, d'automatiser les tâches et de garantir la sécurité des systèmes.</p>
+          </div>
+          <div class="stats">
+            <div class="stat-item">
+              <div class="stat-value">3j/2j</div>
+              <div class="stat-label">Rythme d'alternance</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">1 an+</div>
+              <div class="stat-label">Durée recherchée</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">Paris</div>
+              <div class="stat-label">Localisation</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">Permis B</div>
+              <div class="stat-label">Véhiculé</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -169,82 +339,214 @@
       <h2>Projets informatiques</h2>
       <div class="grid cols-2">
         <article class="card project">
-          <div>
-            <h3 style="margin:0 0 6px">Quizzfly — Jeu de Quiz en ligne de commande</h3>
-            <p class="muted">Lecture des questions depuis un CSV/JSON, validation des réponses et score final. Approfondissement Python (fichiers, boucles, conditions, fonctions).</p>
-            <div class="tags" style="margin:10px 0 12px">
-              <span class="tag">Python</span><span class="tag">CSV</span><span class="tag">JSON</span><span class="tag">Linux</span><span class="tag">VS Code</span>
+          <div class="project-header">
+            <h3 style="margin:0">Quizzfly — Jeu de Quiz CLI</h3>
+            <div class="project-links">
+              <a href="https://github.com/abderabbirodouawn/quizzfly" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="Voir le code sur GitHub">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+                Code
+              </a>
             </div>
-            <details>
-              <summary><strong>Détails</strong></summary>
-              <ul>
-                <li>Timer par question et bonus de série correcte.</li>
-                <li>Banque de questions par thèmes + mélange aléatoire.</li>
-                <li>Sauvegarde des scores en JSON (tableau des meilleurs scores).</li>
-              </ul>
-            </details>
           </div>
+          <p class="muted small">Jeu de quiz interactif en ligne de commande avec lecture des questions depuis CSV/JSON, validation des réponses, timer et système de score.</p>
+          <div class="tags" style="margin:10px 0 12px">
+            <span class="tag">Python</span>
+            <span class="tag">CSV/JSON</span>
+            <span class="tag">Linux</span>
+            <span class="tag">VS Code</span>
+          </div>
+          <details>
+            <summary style="cursor:pointer;font-weight:600;margin-top:8px">🔍 Détails techniques</summary>
+            <ul class="small" style="margin-top:8px">
+              <li>⏱️ Timer par question avec bonus pour séries correctes</li>
+              <li>🎲 Banque de questions par thèmes avec mélange aléatoire</li>
+              <li>💾 Sauvegarde des scores en JSON (tableau des meilleurs scores)</li>
+              <li>📊 Statistiques de progression et historique des parties</li>
+            </ul>
+          </details>
         </article>
 
         <article class="card project">
-          <div>
-            <h3 style="margin:0 0 6px">Implémentation d’un réseau local multi-machines (LAN)</h3>
-            <p class="muted">Adressage IP, configuration d’interfaces, tests de connectivité (ping, traceroute), partage de fichiers, routeur & switch basiques. Commandes réseau : ipconfig, ping, nslookup.</p>
-            <div class="tags" style="margin:10px 0 12px">
-              <span class="tag">Cisco</span><span class="tag">Windows</span><span class="tag">GNS3</span><span class="tag">TCP/IP</span><span class="tag">Routeur</span><span class="tag">Switch</span>
+          <div class="project-header">
+            <h3 style="margin:0">Réseau LAN multi-machines</h3>
+            <div class="project-links">
+              <a href="#" class="icon-btn" aria-label="Documentation du projet">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                </svg>
+                Doc
+              </a>
             </div>
-            <details>
-              <summary><strong>Détails</strong></summary>
-              <ul>
-                <li>Plan d’adressage VLSM & segmentation.</li>
-                <li>Tests de connectivité (ICMP, traceroute).</li>
-                <li>Partage inter-VM & premiers services.</li>
-              </ul>
-            </details>
           </div>
+          <p class="muted small">Infrastructure réseau local avec plusieurs machines virtuelles. Adressage IP, configuration d'interfaces, tests de connectivité et partage de fichiers.</p>
+          <div class="tags" style="margin:10px 0 12px">
+            <span class="tag">VirtualBox</span>
+            <span class="tag">Windows Server</span>
+            <span class="tag">TCP/IP</span>
+            <span class="tag">DHCP</span>
+            <span class="tag">DNS</span>
+          </div>
+          <details>
+            <summary style="cursor:pointer;font-weight:600;margin-top:8px">🔍 Détails techniques</summary>
+            <ul class="small" style="margin-top:8px">
+              <li>🗺️ Plan d'adressage VLSM avec segmentation réseau</li>
+              <li>🔍 Tests de connectivité (ICMP, traceroute, nslookup)</li>
+              <li>📁 Partage de fichiers inter-VM avec SMB/CIFS</li>
+              <li>⚙️ Configuration DHCP et DNS pour automatisation</li>
+            </ul>
+          </details>
         </article>
 
         <article class="card project">
-          <div>
-            <h3 style="margin:0 0 6px">GNS3 — Petit réseau d’entreprise (Cisco)</h3>
-            <p class="muted">Plan d’adressage, configuration interfaces, paramétrage routeur/switch, tests de connectivité & compréhension des échanges LAN.</p>
-            <div class="tags" style="margin:10px 0 12px">
-              <span class="tag">Cisco</span><span class="tag">GNS3</span><span class="tag">TCP/IP</span><span class="tag">Routeur</span><span class="tag">Switch</span>
+          <div class="project-header">
+            <h3 style="margin:0">Infrastructure GNS3 — Cisco</h3>
+            <div class="project-links">
+              <a href="#" class="icon-btn" aria-label="Schéma réseau">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z"/>
+                </svg>
+                Schéma
+              </a>
             </div>
-            <details>
-              <summary><strong>Détails</strong></summary>
-              <ul>
-                <li>Trunking 802.1Q, STP, EtherChannel (intro).</li>
-                <li>Routage statique / OSPF simple.</li>
-                <li>Syslog & NTP (bases d’observabilité).</li>
-              </ul>
-            </details>
           </div>
+          <p class="muted small">Simulation d'un réseau d'entreprise complet avec routeurs Cisco, switches, VLANs, routage statique/dynamique (OSPF) et sécurisation.</p>
+          <div class="tags" style="margin:10px 0 12px">
+            <span class="tag">Cisco IOS</span>
+            <span class="tag">GNS3</span>
+            <span class="tag">VLAN</span>
+            <span class="tag">OSPF</span>
+            <span class="tag">ACL</span>
+          </div>
+          <details>
+            <summary style="cursor:pointer;font-weight:600;margin-top:8px">🔍 Détails techniques</summary>
+            <ul class="small" style="margin-top:8px">
+              <li>🔀 Trunking 802.1Q, STP (Spanning Tree Protocol)</li>
+              <li>🛣️ Routage statique et dynamique avec OSPF</li>
+              <li>🔐 ACL (Access Control Lists) pour filtrage de trafic</li>
+              <li>📋 Syslog et NTP pour observabilité et synchronisation</li>
+            </ul>
+          </details>
+        </article>
+
+        <article class="card project">
+          <div class="project-header">
+            <h3 style="margin:0">Scripts d'automatisation Bash</h3>
+            <div class="project-links">
+              <a href="https://github.com/abderabbirodouawn/bash-scripts" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="Voir le code sur GitHub">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+                Code
+              </a>
+            </div>
+          </div>
+          <p class="muted small">Collection de scripts Bash pour automatiser les tâches d'administration système : backups, monitoring, déploiement et maintenance.</p>
+          <div class="tags" style="margin:10px 0 12px">
+            <span class="tag">Bash</span>
+            <span class="tag">Linux</span>
+            <span class="tag">Cron</span>
+            <span class="tag">Automatisation</span>
+          </div>
+          <details>
+            <summary style="cursor:pointer;font-weight:600;margin-top:8px">🔍 Détails techniques</summary>
+            <ul class="small" style="margin-top:8px">
+              <li>💾 Scripts de backup automatiques avec rotation des logs</li>
+              <li>📊 Monitoring système (CPU, RAM, disque, réseau)</li>
+              <li>🚀 Déploiement automatisé d'applications web</li>
+              <li>🔔 Alertes email en cas d'incident ou de seuil dépassé</li>
+            </ul>
+          </details>
         </article>
       </div>
     </section>
 
     <!-- COMPÉTENCES -->
     <section id="competences">
-      <h2>Compétences</h2>
-      <div class="card">
-        <h3 style="margin-top:0">Techniques</h3>
-        <div class="tags">
-          <span class="tag">Python</span>
-          <span class="tag">Unix / Linux / Bash</span>
-          <span class="tag">Cisco Packet Tracer</span>
-          <span class="tag">GNS3</span>
-          <span class="tag">Réseaux TCP/IP</span>
-          <span class="tag">Configuration IP</span>
-          <span class="tag">Développement Informatique</span>
-          <span class="tag">GLPI</span>
+      <h2>Compétences techniques</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3 style="margin-top:0">🖥️ Systèmes & Administration</h3>
+          <div class="tags">
+            <span class="tag">Linux (Ubuntu, Debian, CentOS)</span>
+            <span class="tag">Windows Server</span>
+            <span class="tag">Active Directory</span>
+            <span class="tag">Bash/Shell scripting</span>
+            <span class="tag">PowerShell</span>
+            <span class="tag">Virtualisation (VirtualBox, VMware)</span>
+            <span class="tag">Docker (bases)</span>
+          </div>
         </div>
-        <div class="divider" style="height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:18px 0;"></div>
-        <h3>Langues</h3>
-        <div class="tags">
-          <span class="tag">Français (maternelle)</span>
-          <span class="tag">Anglais (B2)</span>
-          <span class="tag">Arabe (dialecte)</span>
+
+        <div class="card">
+          <h3 style="margin-top:0">🌐 Réseaux & Sécurité</h3>
+          <div class="tags">
+            <span class="tag">TCP/IP, Modèle OSI</span>
+            <span class="tag">Cisco IOS (routeur, switch)</span>
+            <span class="tag">VLAN, Trunking, STP</span>
+            <span class="tag">Routage statique/dynamique (OSPF)</span>
+            <span class="tag">DHCP, DNS</span>
+            <span class="tag">ACL, Firewall (bases)</span>
+            <span class="tag">GNS3, Packet Tracer</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-top:0">💻 Développement & Outils</h3>
+          <div class="tags">
+            <span class="tag">Python (scripting, automatisation)</span>
+            <span class="tag">Git & GitHub</span>
+            <span class="tag">VS Code</span>
+            <span class="tag">GLPI (ticketing)</span>
+            <span class="tag">Markdown</span>
+            <span class="tag">HTML/CSS (bases)</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-top:0">🗣️ Langues</h3>
+          <div class="tags">
+            <span class="tag">🇫🇷 Français (maternelle)</span>
+            <span class="tag">🇬🇧 Anglais (B2 — technique)</span>
+            <span class="tag">🇲🇦 Arabe (dialecte)</span>
+          </div>
+          <div style="margin-top:16px">
+            <h3>🤝 Soft Skills</h3>
+            <div class="tags">
+              <span class="tag">Travail en équipe</span>
+              <span class="tag">Résolution de problèmes</span>
+              <span class="tag">Autonomie</span>
+              <span class="tag">Rigueur</span>
+              <span class="tag">Curiosité technique</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certifications section -->
+      <h2 style="margin-top:42px">🏆 Certifications & Formations en cours</h2>
+      <div class="grid cols-3">
+        <div class="cert-badge">
+          <div class="cert-icon">C</div>
+          <div class="cert-info">
+            <div class="cert-name">Cisco CCNA</div>
+            <div class="cert-org">En préparation</div>
+          </div>
+        </div>
+        <div class="cert-badge">
+          <div class="cert-icon">L</div>
+          <div class="cert-info">
+            <div class="cert-name">Linux Essentials</div>
+            <div class="cert-org">En préparation (LPI)</div>
+          </div>
+        </div>
+        <div class="cert-badge">
+          <div class="cert-icon">P</div>
+          <div class="cert-info">
+            <div class="cert-name">Python PCEP</div>
+            <div class="cert-org">Objectif 2025</div>
+          </div>
         </div>
       </div>
     </section>
@@ -253,67 +555,154 @@
     <section id="experiences">
       <h2>Expériences professionnelles</h2>
       <div class="card">
-        <p><strong>Assistant d'éducation (AED)</strong> — Lycée Adolphe Chérioux, Vitry-sur-Seine (oct. 2022 → juil. 2023)</p>
-        <ul class="small muted">
-          <li>Gestion quotidienne et sécurité des élèves.</li>
-          <li>Collaboration avec équipes pédagogiques & administratives.</li>
-        </ul>
-        <div class="divider" style="height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:14px 0;"></div>
-        <p><strong>Opérateur en télésurveillance</strong> — Stanley Black & Decker (mars 2022 → juin 2022)</p>
-        <ul class="small muted">
-          <li>Surveillance temps réel et détection d’incidents.</li>
-          <li>Analyse et traitement des alertes.</li>
-        </ul>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">Oct. 2022 → Juil. 2023</div>
+            <div class="timeline-title">Assistant d'éducation (AED)</div>
+            <p class="small muted" style="margin:4px 0">Lycée Adolphe Chérioux, Vitry-sur-Seine</p>
+            <ul class="small">
+              <li>Gestion quotidienne et sécurité des élèves (surveillance, encadrement)</li>
+              <li>Collaboration étroite avec les équipes pédagogiques et administratives</li>
+              <li>Développement de compétences en communication et gestion de conflits</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Mars 2022 → Juin 2022</div>
+            <div class="timeline-title">Opérateur en télésurveillance</div>
+            <p class="small muted" style="margin:4px 0">Stanley Black & Decker</p>
+            <ul class="small">
+              <li>Surveillance en temps réel des systèmes de sécurité et détection d'incidents</li>
+              <li>Analyse et traitement rapide des alertes (intrusion, incendie, technique)</li>
+              <li>Coordination avec les équipes d'intervention et services d'urgence</li>
+              <li>Rédaction de rapports d'incidents et suivi des interventions</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top:24px;padding:16px;background:rgba(124,58,237,.08);border-radius:12px;border:1px solid var(--border)">
+          <p style="margin:0;font-size:14px"><strong>💡 Compétences transversales développées :</strong> Rigueur, réactivité, gestion du stress, travail en équipe, sens des responsabilités.</p>
+        </div>
       </div>
     </section>
 
     <!-- FORMATIONS -->
     <section id="formations">
-      <h2>Formations</h2>
+      <h2>Formations & Parcours académique</h2>
       <div class="card">
-        <p><strong>Bac +2 — Chargé de projets informatiques</strong> — ETNA, Ivry-sur-Seine (oct. 2025 → en cours)</p>
-        <p><strong>Année préparatoire — Technicien Supérieur Systèmes & Réseaux</strong> — Studi (oct. 2024 → mars 2025)</p>
-        <p><strong>Baccalauréat — Technicien installateur système énergétique & climatique</strong> — Lycée Adolphe Chérioux (janv. 2018)</p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">Oct. 2025 → En cours</div>
+            <div class="timeline-title">Bac +2 — Chargé de projets informatiques</div>
+            <p class="small muted" style="margin:4px 0">ETNA, Ivry-sur-Seine</p>
+            <p class="small">Formation en alternance axée sur l'administration systèmes et réseaux, le développement et la gestion de projets IT.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Oct. 2024 → Mars 2025</div>
+            <div class="timeline-title">Année préparatoire — Technicien Supérieur Systèmes & Réseaux</div>
+            <p class="small muted" style="margin:4px 0">Studi (Formation à distance)</p>
+            <p class="small">Fondamentaux des systèmes d'exploitation, réseaux TCP/IP, sécurité informatique et virtualisation.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Janv. 2018</div>
+            <div class="timeline-title">Baccalauréat Professionnel</div>
+            <p class="small muted" style="margin:4px 0">Technicien installateur système énergétique & climatique — Lycée Adolphe Chérioux</p>
+            <p class="small">Formation technique avec apprentissage de la rigueur, du travail en équipe et de la lecture de plans.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VEILLE TECHNOLOGIQUE -->
+    <section id="veille">
+      <h2>📚 Veille technologique & Apprentissage continu</h2>
+      <div class="card">
+        <p style="margin-top:0">Je reste constamment à jour sur les technologies et tendances du secteur IT en suivant activement :</p>
+        <div class="grid cols-2" style="margin-top:16px">
+          <div>
+            <h4 style="margin:0 0 8px;font-size:16px">📰 Sources d'information</h4>
+            <ul class="small">
+              <li>Reddit : r/sysadmin, r/networking, r/homelab</li>
+              <li>YouTube : NetworkChuck, David Bombal, Learn Linux TV</li>
+              <li>Blogs techniques : Cisco Learning Network, Ubuntu Blog</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="margin:0 0 8px;font-size:16px">🎯 Projets d'apprentissage</h4>
+            <ul class="small">
+              <li>Configuration d'un homelab avec proxmox</li>
+              <li>Apprentissage de Ansible pour l'automatisation</li>
+              <li>Exploration de Kubernetes (bases)</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact">
-      <h2>Contact</h2>
+      <h2>📬 Me contacter</h2>
       <div class="grid cols-2">
-        <div class="card" id="contact-card" role="button" tabindex="0">
-          <p>Vous souhaitez me contacter ou me proposer une alternance ?</p>
-          <div class="cta">
-            <a class="btn primary" id="email-btn2">Écrire un email</a>
-            <a class="btn" href="https://www.linkedin.com/in/rodouawn-abderabbi" target="_blank" rel="noopener">LinkedIn</a>
+        <div class="card" style="background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(34,211,238,.1))">
+          <h3 style="margin-top:0">Intéressé par mon profil ?</h3>
+          <p>Je suis à la recherche active d'une alternance et serais ravi d'échanger avec vous sur les opportunités disponibles dans votre entreprise.</p>
+          <div class="cta" style="margin-top:16px">
+            <a class="btn primary" id="email-btn2" aria-label="M'envoyer un email">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+              </svg>
+              Écrire un email
+            </a>
+            <a class="btn" href="https://www.linkedin.com/in/rodouawn-abderabbi" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+              </svg>
+              LinkedIn
+            </a>
           </div>
         </div>
+        
         <div class="card">
-          <h3 style="margin-top:0">Informations</h3>
-          <ul class="small muted">
-            <li>Localisation : Paris (Île-de-France)</li>
-            <li>Disponibilité : immédiate — alternance 3j entreprise / 2j école</li>
-            <li>Permis B — véhiculé</li>
+          <h3 style="margin-top:0">📍 Informations pratiques</h3>
+          <ul class="small">
+            <li><strong>Localisation :</strong> Paris, Île-de-France</li>
+            <li><strong>Disponibilité :</strong> Immédiate</li>
+            <li><strong>Format alternance :</strong> 3 jours entreprise / 2 jours école</li>
+            <li><strong>Durée souhaitée :</strong> 1 an minimum (renouvelable)</li>
+            <li><strong>Mobilité :</strong> Permis B — Véhiculé</li>
+            <li><strong>Email :</strong> <a href="mailto:abderabbi.rodouawn@gmail.com" style="color:var(--brand);font-weight:600">abderabbi.rodouawn@gmail.com</a></li>
           </ul>
         </div>
       </div>
     </section>
+
     <footer>
-      © <span id="year"></span> Abderabbi Rodouawn — Fait avec ❤️ et un peu de <code>HTML/CSS/JS</code>.
+      <p>© <span id="year"></span> Abderabbi Rodouawn — Portfolio réalisé avec ❤️</p>
+      <p class="small" style="margin-top:8px;opacity:.7">Dernière mise à jour : Novembre 2025 • <a href="https://github.com/abderabbirodouawn" target="_blank" rel="noopener noreferrer" style="color:var(--brand)">GitHub</a></p>
     </footer>
   </main>
 
   <script>
     /* Thème (jour/nuit) */
     const root=document.documentElement;const key='theme:light';
-    function applyTheme(){root.classList.toggle('light',localStorage.getItem(key)==='1')}
+    function applyTheme(){
+      const isLight=localStorage.getItem(key)==='1';
+      root.classList.toggle('light',isLight);
+      document.getElementById('theme-text').textContent=isLight?'☀️':'🌙';
+    }
     applyTheme();
-    document.getElementById('theme').addEventListener('click',()=>{localStorage.setItem(key,localStorage.getItem(key)==='1'?'0':'1');applyTheme();initCanvasColors();});
+    document.getElementById('theme').addEventListener('click',()=>{
+      localStorage.setItem(key,localStorage.getItem(key)==='1'?'0':'1');
+      applyTheme();
+      initCanvasColors();
+    });
 
     /* Email via Gmail compose + fallback mailto */
     const email='abderabbi.rodouawn@gmail.com';
-    const subject='Candidature / Alternance — Abderabbi Rodouawn';
-    const body=`Bonjour Abderabbi,\n\nJe vous contacte via votre portfolio concernant ...\n\nCordialement,`;
+    const subject='Opportunité alternance — Abderabbi Rodouawn';
+    const body=`Bonjour Abderabbi,\n\nJe vous contacte suite à la consultation de votre portfolio concernant une opportunité d'alternance.\n\nCordialement,`;
     function openGmailCompose(){
       const gmailUrl=`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       const win=window.open(gmailUrl,'_blank');
@@ -321,9 +710,12 @@
     }
     document.getElementById('email-btn').addEventListener('click',openGmailCompose);
     document.getElementById('email-btn2').addEventListener('click',openGmailCompose);
-    const contactCard=document.getElementById('contact-card');
-    contactCard.addEventListener('click',openGmailCompose);
-    contactCard.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')openGmailCompose()});
+
+    /* Télécharger CV (à créer) */
+    document.getElementById('cv-btn').addEventListener('click',(e)=>{
+      e.preventDefault();
+      alert('📄 Le CV en PDF sera bientôt disponible au téléchargement !\n\nEn attendant, vous pouvez me contacter directement par email.');
+    });
 
     /* Année */
     document.getElementById('year').textContent=new Date().getFullYear();
@@ -340,6 +732,15 @@
       for(let i=0;i<particles.length;i++){for(let j=i+1;j<particles.length;j++){const a=particles[i],b=particles[j];const d=Math.hypot(a.x-b.x,a.y-b.y);if(d<DIST){const t=d/DIST;ctx.strokeStyle=mix(colorA,colorB,t);ctx.globalAlpha=1-t;ctx.lineWidth=.8*(1-t);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.globalAlpha=1;}}}
       requestAnimationFrame(loop);
     })();
+
+    /* Smooth scroll pour navigation */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+      anchor.addEventListener('click',function(e){
+        e.preventDefault();
+        const target=document.querySelector(this.getAttribute('href'));
+        if(target){target.scrollIntoView({behavior:'smooth',block:'start'})}
+      });
+    });
   </script>
 </body>
 </html>
