@@ -60,20 +60,73 @@ header .container.nav {
   align-items: center;
 }
 
+/* === Logo A.R animé === */
 .ar-main {
   font-family: ui-serif, "Times New Roman", Georgia, serif;
   font-weight: 800;
   font-style: italic;
-  font-size: 28px;
+  font-size: 30px;
   line-height: 1;
   letter-spacing: 0;
-  background: linear-gradient(90deg, var(--brand-2), #5ee7ff, var(--brand), var(--brand-2));
-  background-size: 300% 100%;
+  background: linear-gradient(
+    90deg,
+    var(--brand-2),
+    #5ee7ff,
+    var(--brand),
+    #5ee7ff,
+    var(--brand-2)
+  );
+  background-size: 400% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: ar-sheen 6s ease-in-out infinite;
+  text-shadow:
+    0 0 10px rgba(34, 211, 238, 0.4),
+    0 0 20px rgba(124, 58, 237, 0.25);
+  filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.25));
+  animation: 
+    ar-gradient 6s ease-in-out infinite,
+    ar-glow 3s ease-in-out infinite alternate;
+  transition: transform 0.25s ease, text-shadow 0.25s ease;
 }
+
+.ar-wrap:hover .ar-main {
+  transform: scale(1.05);
+  text-shadow:
+    0 0 15px rgba(34, 211, 238, 0.6),
+    0 0 40px rgba(124, 58, 237, 0.45);
+  filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.4));
+}
+
+/* Animation du dégradé fluide */
+@keyframes ar-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Animation du glow respirant */
+@keyframes ar-glow {
+  0% {
+    text-shadow:
+      0 0 6px rgba(34, 211, 238, 0.3),
+      0 0 12px rgba(124, 58, 237, 0.25);
+    transform: scale(1);
+  }
+  50% {
+    text-shadow:
+      0 0 12px rgba(34, 211, 238, 0.5),
+      0 0 25px rgba(124, 58, 237, 0.35);
+    transform: scale(1.03);
+  }
+  100% {
+    text-shadow:
+      0 0 6px rgba(34, 211, 238, 0.3),
+      0 0 12px rgba(124, 58, 237, 0.25);
+    transform: scale(1);
+  }
+}
+
 
 /* Liens */
 .links {
