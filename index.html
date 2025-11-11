@@ -230,10 +230,21 @@
   </div>
 
   <header>
-<div class="brand brand-logo">
-  <a href="#accueil" class="ar-wrap" aria-label="Accueil">
-    <span class="ar-main">A<span class="dot">.</span>R</span>
-  </a>
+<a href="#accueil" class="logo-ar" aria-label="Accueil">
+  <svg viewBox="0 0 200 80" class="ar-logo-svg">
+    <defs>
+      <linearGradient id="gradAR" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#22d3ee">
+          <animate attributeName="offset" values="0;1;0" dur="6s" repeatCount="indefinite" />
+        </stop>
+        <stop offset="50%" stop-color="#7c3aed">
+          <animate attributeName="offset" values="0.5;1;0.5" dur="6s" repeatCount="indefinite" />
+        </stop>
+      </linearGradient>
+    </defs>
+    <text x="0" y="55" fill="url(#gradAR)" font-family="Georgia, serif" font-style="italic" font-weight="900" font-size="58">A.R</text>
+  </svg>
+</a>
 </div>
       <nav class="links" role="navigation" aria-label="Navigation principale">
         <a href="#accueil">Accueil</a>
@@ -422,7 +433,6 @@
           <details>
             <summary style="cursor:pointer;font-weight:600;margin-top:8px">🔍 Détails techniques</summary>
             <ul class="small" style="margin-top:8px">
-              <li>🔀 Trunking 802.1Q, STP (Spanning Tree Protocol)</li>
               <li>🛣️ Routage statique et dynamique avec OSPF</li>
               <li>🔐 ACL (Access Control Lists) pour filtrage de trafic</li>
               <li>📋 Syslog et NTP pour observabilité et synchronisation</li>
