@@ -27,6 +27,84 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+    /* === Logo A.R animé, sans image === */
+:root{
+  --neon1:#5ee7ff;    /* couleur 1 (nuit) */
+  --neon2:#22d3ee;    /* couleur 2 (nuit) */
+  --neon3:#7c3aed;    /* couleur 3 (nuit) */
+}
+:root.light{
+  --neon1:#60a5fa;    /* couleur 1 (jour) */
+  --neon2:#22d3ee;    /* couleur 2 (jour) */
+  --neon3:#6366f1;    /* couleur 3 (jour) */
+}
+
+/* remplace l’ancien .brand par un bloc cliquable + centré verticalement */
+.brand-logo{
+  display:flex; align-items:center; min-height:48px;
+}
+.ar-wrap{
+  display:flex; flex-direction:column; align-items:flex-start;
+  text-decoration:none; line-height:1;
+}
+
+/* Texte principal A.R */
+.ar-main{
+  font-family: ui-serif, "Times New Roman", Georgia, serif; /* élégant, présent partout */
+  font-weight: 800;
+  font-style: italic;
+  font-size: 28px;                 /* ajuste si tu veux plus grand */
+  letter-spacing: .5px;
+  background: linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3),var(--neon1));
+  background-size: 300% 100%;
+  -webkit-background-clip:text; background-clip:text; color: transparent;
+  filter: drop-shadow(0 0 10px rgba(34,211,238,.35));
+  text-shadow:
+    0 0 2px rgba(255,255,255,.06),
+    0 0 18px rgba(34,211,238,.25);
+  animation: ar-sheen 6s ease-in-out infinite;
+  transition: transform .2s ease, filter .2s ease, text-shadow .2s ease;
+}
+.ar-main .dot{
+  margin: 0 2px;
+  opacity:.9;
+}
+
+/* Légende en dessous */
+.ar-sub{
+  margin-top:4px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: rgba(190,255,255,.9);
+  text-shadow: 0 0 10px rgba(34,211,238,.35);
+  opacity:.95;
+}
+
+/* Effet au survol */
+.ar-wrap:hover .ar-main{
+  transform: translateY(-1px) scale(1.03);
+  text-shadow:
+    0 0 4px rgba(255,255,255,.1),
+    0 0 26px rgba(34,211,238,.45),
+    0 0 56px rgba(124,58,237,.28);
+  filter: drop-shadow(0 0 18px rgba(34,211,238,.45));
+}
+
+/* Animation du dégradé */
+@keyframes ar-sheen {
+  0%   {background-position: 0% 50%}
+  50%  {background-position: 100% 50%}
+  100% {background-position: 0% 50%}
+}
+
+/* Petites tailles d’écran : centre le logo si la nav passe à la ligne */
+@media (max-width: 900px){
+  .brand-logo{order: -1;}
+  .ar-wrap{align-items:center}
+}
+
     :root{
       /* 🌙 Thème nuit (par défaut) */
       --bg: #0b0f19;
