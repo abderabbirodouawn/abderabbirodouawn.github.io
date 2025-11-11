@@ -33,31 +33,30 @@
   
   <style>
     /* === Alignement parfait du header === */
-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 64px; /* hauteur homogène */
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  backdrop-filter: saturate(160%) blur(10px);
-  background: linear-gradient(to bottom, rgba(8,12,20,.85), rgba(8,12,20,.55));
-  border-bottom: 1px solid var(--border);
-}
+<header>
+  <div class="container nav">
+    <!-- Logo texte animé A.R -->
+    <div class="brand-logo" aria-label="Monogramme A.R">
+      <span class="ar-main">A.R</span>
+    </div>
 
-:root.light header {
-  background: linear-gradient(to bottom, rgba(255,255,255,.9), rgba(255,255,255,.8));
-}
+    <!-- Liens -->
+    <nav class="links" role="navigation" aria-label="Navigation principale">
+      <a href="#accueil">Accueil</a>
+      <a href="#apropos">À propos</a>
+      <a href="#projets">Projets</a>
+      <a href="#competences">Compétences</a>
+      <a href="#experiences">Expériences</a>
+      <a href="#formations">Formations</a>
+      <a href="#contact">Contact</a>
+    </nav>
 
-header .container.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1100px;
-  padding: 0 20px;
-}
+    <!-- Bouton thème -->
+    <button id="theme" class="switch" aria-label="Changer le thème">
+      <span id="theme-text">🌙</span>
+    </button>
+  </div>
+</header>
 
 /* Logo A.R */
 .brand-logo {
