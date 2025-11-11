@@ -32,34 +32,83 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
-    :root{
-      /* 🌙 Thème nuit (par défaut) */
-      --bg: #0b0f19;
-      --layer: #0e1525;
-      --card: #111826;
-      --muted: #94a3b8;
-      --text: #e2e8f0;
-      --brand: #7c3aed;
-      --brand-2: #22d3ee;
-      --accent: #10b981;
-      --border: rgba(148,163,184,.15);
-      --shadow: 0 12px 30px rgba(0,0,0,.35);
-      --hover: rgba(124,58,237,.12);
-    }
-    :root.light{
-      /* ☀️ Thème jour */
-      --bg: #f6f8fc;
-      --layer: #ffffff;
-      --card: #ffffff;
-      --muted: #475569;
-      --text: #0f172a;
-      --brand: #6366f1;
-      --brand-2: #06b6d4;
-      --accent: #059669;
-      --border: rgba(2,6,23,.08);
-      --shadow: 0 10px 26px rgba(2,6,23,.08);
-      --hover: rgba(99,102,241,.08);
-    }
+    /* === Alignement parfait du header === */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px; /* hauteur homogène */
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: saturate(160%) blur(10px);
+  background: linear-gradient(to bottom, rgba(8,12,20,.85), rgba(8,12,20,.55));
+  border-bottom: 1px solid var(--border);
+}
+
+:root.light header {
+  background: linear-gradient(to bottom, rgba(255,255,255,.9), rgba(255,255,255,.8));
+}
+
+header .container.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1100px;
+  padding: 0 20px;
+}
+
+/* Logo A.R */
+.brand-logo {
+  display: flex;
+  align-items: center;
+}
+
+.ar-main {
+  font-family: ui-serif, "Times New Roman", Georgia, serif;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: 0;
+  background: linear-gradient(90deg, var(--brand-2), #5ee7ff, var(--brand), var(--brand-2));
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: ar-sheen 6s ease-in-out infinite;
+}
+
+/* Liens */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.links a {
+  font-weight: 600;
+  opacity: 0.9;
+  padding: 8px 0;
+  transition: opacity 0.2s;
+}
+
+.links a:hover {
+  opacity: 1;
+}
+
+/* Bouton thème 🌙 */
+.switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  background: var(--card);
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
 
     *{box-sizing:border-box; transition: background-color .25s, color .25s, border-color .25s}
     html{scroll-behavior:smooth}
@@ -262,7 +311,7 @@
         </span>
 
         <h1 class="title">
-          <span class="fancy-name">Bonjour et bienvenue dans mon portfolio, je suis Abderabbi Rodouawn</span>
+          <span class="fancy-name">bienvenue dans le portfolio de Abderabbi Rodouawn</span>
         </h1>
 
         <p class="subtitle">Étudiant motivé basé à <strong>Paris</strong>, en recherche active d'une <strong>alternance</strong> (3 jours en entreprise / 2 jours à l'école) pour <strong>1 an minimum</strong>. Passionné par les réseaux, la sécurité et l'automatisation.</p>
@@ -287,14 +336,6 @@
             </svg>
             LinkedIn
           </a>
-          <a class="btn" href="https://abderabbirodouawn.github.io/" target="_blank" rel="noopener noreferrer" aria-label="Voir mon GitHub Pages">
-            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-            </svg>
-            GitHub
-          </a>
-        </div>
-      </div>
 
       <!-- 📸 Photo à droite du texte -->
       <div class="photo-wrapper">
@@ -422,7 +463,6 @@
           <details>
             <summary style="cursor:pointer;font-weight:600;margin-top:8px">🔍 Détails techniques</summary>
             <ul class="small" style="margin-top:8px">
-              <li>🔀 Trunking 802.1Q, STP (Spanning Tree Protocol)</li>
               <li>🛣️ Routage statique et dynamique avec OSPF</li>
               <li>🔐 ACL (Access Control Lists) pour filtrage de trafic</li>
               <li>📋 Syslog et NTP pour observabilité et synchronisation</li>
@@ -507,9 +547,9 @@
         <div class="card">
           <h3 style="margin-top:0">🗣️ Langues</h3>
           <div class="tags">
-            <span class="tag">🇫🇷 Français (maternelle)</span>
-            <span class="tag">🇬🇧 Anglais (B2 — technique)</span>
-            <span class="tag">🇲🇦 Arabe (dialecte)</span>
+            <span class="tag">Français (maternelle)</span>
+            <span class="tag">Anglais (B2 — technique)</span>
+            <span class="tag">Arabe (dialecte)</span>
           </div>
           <div style="margin-top:16px">
             <h3>🤝 Soft Skills</h3>
@@ -523,33 +563,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Certifications section -->
-      <h2 style="margin-top:42px">🏆 Certifications & Formations en cours</h2>
-      <div class="grid cols-3">
-        <div class="cert-badge">
-          <div class="cert-icon">C</div>
-          <div class="cert-info">
-            <div class="cert-name">Cisco CCNA</div>
-            <div class="cert-org">En préparation</div>
-          </div>
-        </div>
-        <div class="cert-badge">
-          <div class="cert-icon">L</div>
-          <div class="cert-info">
-            <div class="cert-name">Linux Essentials</div>
-            <div class="cert-org">En préparation (LPI)</div>
-          </div>
-        </div>
-        <div class="cert-badge">
-          <div class="cert-icon">P</div>
-          <div class="cert-info">
-            <div class="cert-name">Python PCEP</div>
-            <div class="cert-org">Objectif 2025</div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- EXPÉRIENCES -->
     <section id="experiences">
@@ -632,9 +645,9 @@
           <div>
             <h4 style="margin:0 0 8px;font-size:16px">🎯 Projets d'apprentissage</h4>
             <ul class="small">
-              <li>Configuration d'un homelab avec proxmox</li>
-              <li>Apprentissage de Ansible pour l'automatisation</li>
-              <li>Exploration de Kubernetes (bases)</li>
+              <li>Déploiement d’un homelab virtualisé sous Proxmox (VM Linux & routeurs Cisco)</li>
+              <li>Création de playbooks Ansible pour automatiser la configuration réseau</li>
+              <li>Exploration de Kubernetes : création de clusters et gestion de conteneurs</li>
             </ul>
           </div>
         </div>
