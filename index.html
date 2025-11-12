@@ -60,7 +60,48 @@
       --shadow: 0 10px 26px rgba(2,6,23,.08);
       --hover: rgba(99,102,241,.08);
     }
-
+/* Initiales A.R animées */
+.monogram{
+  font-size:24px;
+  font-style:italic;
+  font-weight:900;
+  background: linear-gradient(135deg,var(--brand),var(--brand-2),#8b5cf6);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-shift 3s ease-in-out infinite;
+  text-shadow: 0 0 20px rgba(124,58,237,.3);
+  position:relative;
+  padding:8px 12px;
+  border-radius:8px;
+  transition:transform .3s ease;
+}
+.monogram:hover{
+  transform: scale(1.1) rotate(-2deg);
+  filter: drop-shadow(0 4px 12px rgba(124,58,237,.4));
+}
+.monogram::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:8px;
+  padding:2px;
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity:.5;
+  animation: border-glow 2s ease-in-out infinite;
+}
+@keyframes gradient-shift{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+@keyframes border-glow{
+  0%,100%{opacity:.3}
+  50%{opacity:.8}
+}
     *{box-sizing:border-box; transition: background-color .25s, color .25s, border-color .25s}
     html{scroll-behavior:smooth}
     html,body{height:100%; margin:0; font-family:Inter,system-ui,sans-serif; color:var(--text); background:linear-gradient(180deg,var(--layer),var(--bg)); overflow-x:hidden;}
