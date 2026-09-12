@@ -38,13 +38,117 @@
 *{box-sizing:border-box;margin:0;padding:0;transition:background-color .25s,color .25s,border-color .25s}
 html{scroll-behavior:smooth}
 html,body{background:var(--bg);color:var(--text)}
-body{font-family:'Inter',sans-serif;overflow-x:hidden}
+body{
+  font-family:'Inter',sans-serif;overflow-x:hidden;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='64'%3E%3Cdefs%3E%3Cpattern id='g' width='128' height='64' patternUnits='userSpaceOnUse'%3E%3Cg fill='none' stroke='rgba(251,191,36,0.13)' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 6h12v12h-12z M6 6l12 12'/%3E%3Cpath d='M38 4v16M38 4h10M38 10h8M38 16h10'/%3E%3Cpath d='M72 20l4-14 4 14M68 20h16M74 14h4'/%3E%3Cpath d='M110 4v12M104 10h12'/%3E%3Ccircle cx='110' cy='16' r='1.4' fill='rgba(251,191,36,0.13)' stroke='none'/%3E%3Cpath d='M4 46l4 4 4-4 4 4 4-4'/%3E%3Cpath d='M38 36h12M38 42h8M38 48h12'/%3E%3Cpath d='M70 36v6M70 42l-4 6M70 42l4 6'/%3E%3Cpath d='M100 36h4v16h-4M112 36h4v16h-4'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect width='128' height='64' fill='url(%23g)'/%3E%3C/svg%3E");
+  background-repeat:repeat;
+  animation: glyph-drift 50s linear infinite;
+}
+:root.light body{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='64'%3E%3Cdefs%3E%3Cpattern id='g' width='128' height='64' patternUnits='userSpaceOnUse'%3E%3Cg fill='none' stroke='rgba(180,83,9,0.12)' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 6h12v12h-12z M6 6l12 12'/%3E%3Cpath d='M38 4v16M38 4h10M38 10h8M38 16h10'/%3E%3Cpath d='M72 20l4-14 4 14M68 20h16M74 14h4'/%3E%3Cpath d='M110 4v12M104 10h12'/%3E%3Ccircle cx='110' cy='16' r='1.4' fill='rgba(180,83,9,0.12)' stroke='none'/%3E%3Cpath d='M4 46l4 4 4-4 4 4 4-4'/%3E%3Cpath d='M38 36h12M38 42h8M38 48h12'/%3E%3Cpath d='M70 36v6M70 42l-4 6M70 42l4 6'/%3E%3Cpath d='M100 36h4v16h-4M112 36h4v16h-4'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect width='128' height='64' fill='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* Balayage de lumière au-dessus de l'écriture */
+#glyphShine{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='64'%3E%3Cg fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 6h12v12h-12z M6 6l12 12'/%3E%3Cpath d='M38 4v16M38 4h10M38 10h8M38 16h10'/%3E%3Cpath d='M72 20l4-14 4 14M68 20h16M74 14h4'/%3E%3Cpath d='M110 4v12M104 10h12'/%3E%3Ccircle cx='110' cy='16' r='2' fill='%23000' stroke='none'/%3E%3Cpath d='M4 46l4 4 4-4 4 4 4-4'/%3E%3Cpath d='M38 36h12M38 42h8M38 48h12'/%3E%3Cpath d='M70 36v6M70 42l-4 6M70 42l4 6'/%3E%3Cpath d='M100 36h4v16h-4M112 36h4v16h-4'/%3E%3C/g%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='64'%3E%3Cg fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 6h12v12h-12z M6 6l12 12'/%3E%3Cpath d='M38 4v16M38 4h10M38 10h8M38 16h10'/%3E%3Cpath d='M72 20l4-14 4 14M68 20h16M74 14h4'/%3E%3Cpath d='M110 4v12M104 10h12'/%3E%3Ccircle cx='110' cy='16' r='2' fill='%23000' stroke='none'/%3E%3Cpath d='M4 46l4 4 4-4 4 4 4-4'/%3E%3Cpath d='M38 36h12M38 42h8M38 48h12'/%3E%3Cpath d='M70 36v6M70 42l-4 6M70 42l4 6'/%3E%3Cpath d='M100 36h4v16h-4M112 36h4v16h-4'/%3E%3C/g%3E%3C/svg%3E");
+  -webkit-mask-repeat:repeat;mask-repeat:repeat;
+  -webkit-mask-size:128px 64px;mask-size:128px 64px;
+  background:linear-gradient(115deg, transparent 25%, rgba(251,191,36,.95) 42%, rgba(249,115,22,.95) 48%, rgba(167,139,250,.95) 54%, transparent 72%);
+  background-size:340% 340%;
+  animation:glyphShine 10s linear infinite;
+}
+@keyframes glyphShine{
+  0%{background-position:0% 0%}
+  100%{background-position:200% 200%}
+}
+@keyframes glyph-drift{
+  from{background-position:0 0}
+  to{background-position:-690px -460px}
+}
+
+/* Petites étincelles de luminosité qui traversent les glyphes */
+.glyph-sparks{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='64'%3E%3Cg fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 6h12v12h-12z M6 6l12 12'/%3E%3Cpath d='M38 4v16M38 4h10M38 10h8M38 16h10'/%3E%3Cpath d='M72 20l4-14 4 14M68 20h16M74 14h4'/%3E%3Cpath d='M110 4v12M104 10h12'/%3E%3Ccircle cx='110' cy='16' r='2' fill='%23000' stroke='none'/%3E%3Cpath d='M4 46l4 4 4-4 4 4 4-4'/%3E%3Cpath d='M38 36h12M38 42h8M38 48h12'/%3E%3Cpath d='M70 36v6M70 42l-4 6M70 42l4 6'/%3E%3Cpath d='M100 36h4v16h-4M112 36h4v16h-4'/%3E%3C/g%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='64'%3E%3Cg fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 6h12v12h-12z M6 6l12 12'/%3E%3Cpath d='M38 4v16M38 4h10M38 10h8M38 16h10'/%3E%3Cpath d='M72 20l4-14 4 14M68 20h16M74 14h4'/%3E%3Cpath d='M110 4v12M104 10h12'/%3E%3Ccircle cx='110' cy='16' r='2' fill='%23000' stroke='none'/%3E%3Cpath d='M4 46l4 4 4-4 4 4 4-4'/%3E%3Cpath d='M38 36h12M38 42h8M38 48h12'/%3E%3Cpath d='M70 36v6M70 42l-4 6M70 42l4 6'/%3E%3Cpath d='M100 36h4v16h-4M112 36h4v16h-4'/%3E%3C/g%3E%3C/svg%3E");
+  -webkit-mask-repeat:repeat;mask-repeat:repeat;
+  -webkit-mask-size:128px 64px;mask-size:128px 64px;
+}
+.spark{
+  position:absolute;
+  left:var(--x);top:var(--y);
+  width:var(--sz);height:var(--sz);
+  transform:translate(-50%,-50%) scale(.6);
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,.98) 0%, rgba(var(--c),1) 22%, rgba(var(--c),.65) 48%, transparent 74%);
+  -webkit-mask-image:inherit;mask-image:inherit;
+  -webkit-mask-repeat:inherit;mask-repeat:inherit;
+  -webkit-mask-size:inherit;mask-size:inherit;
+  opacity:0;
+  filter:drop-shadow(0 0 10px rgba(var(--c),1)) drop-shadow(0 0 26px rgba(var(--c),.75)) drop-shadow(0 0 46px rgba(var(--c),.4));
+  animation:spark-twinkle var(--dur) ease-in-out infinite;
+  animation-delay:var(--delay);
+}
+@keyframes spark-twinkle{
+  0%,38%,100%{opacity:0;transform:translate(-50%,-50%) scale(.55)}
+  50%{opacity:1;transform:translate(-50%,-50%) scale(1.3)}
+  62%{opacity:0;transform:translate(-50%,-50%) scale(.85)}
+}
+.spark-orange{
+  filter:drop-shadow(0 0 12px rgba(249,115,22,1)) drop-shadow(0 0 32px rgba(249,115,22,.85)) drop-shadow(0 0 58px rgba(249,115,22,.45));
+  animation-name:spark-flash;
+}
+@keyframes spark-flash{
+  0%,100%{opacity:0;transform:translate(-50%,-50%) scale(.5)}
+  3%{opacity:1;transform:translate(-50%,-50%) scale(1.35)}
+  6%{opacity:.1;transform:translate(-50%,-50%) scale(.85)}
+  9%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}
+  13%{opacity:0;transform:translate(-50%,-50%) scale(.6)}
+}
+@media(prefers-reduced-motion:reduce){#glyphShine{display:none}body{animation:none}.glyph-sparks{display:none}#glyphStreaks{display:none}}
+
+/* Traits de lumière filant le long des glyphes */
+#glyphStreaks{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='64'%3E%3Cg fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 6h12v12h-12z M6 6l12 12'/%3E%3Cpath d='M38 4v16M38 4h10M38 10h8M38 16h10'/%3E%3Cpath d='M72 20l4-14 4 14M68 20h16M74 14h4'/%3E%3Cpath d='M110 4v12M104 10h12'/%3E%3Ccircle cx='110' cy='16' r='2' fill='%23000' stroke='none'/%3E%3Cpath d='M4 46l4 4 4-4 4 4 4-4'/%3E%3Cpath d='M38 36h12M38 42h8M38 48h12'/%3E%3Cpath d='M70 36v6M70 42l-4 6M70 42l4 6'/%3E%3Cpath d='M100 36h4v16h-4M112 36h4v16h-4'/%3E%3C/g%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='64'%3E%3Cg fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 6h12v12h-12z M6 6l12 12'/%3E%3Cpath d='M38 4v16M38 4h10M38 10h8M38 16h10'/%3E%3Cpath d='M72 20l4-14 4 14M68 20h16M74 14h4'/%3E%3Cpath d='M110 4v12M104 10h12'/%3E%3Ccircle cx='110' cy='16' r='2' fill='%23000' stroke='none'/%3E%3Cpath d='M4 46l4 4 4-4 4 4 4-4'/%3E%3Cpath d='M38 36h12M38 42h8M38 48h12'/%3E%3Cpath d='M70 36v6M70 42l-4 6M70 42l4 6'/%3E%3Cpath d='M100 36h4v16h-4M112 36h4v16h-4'/%3E%3C/g%3E%3C/svg%3E");
+  -webkit-mask-repeat:repeat;mask-repeat:repeat;
+  -webkit-mask-size:128px 64px;mask-size:128px 64px;
+  background:repeating-linear-gradient(115deg,
+    transparent 0px, transparent 46px,
+    rgba(251,191,36,.95) 48px,
+    rgba(249,115,22,.95) 51px,
+    transparent 53px, transparent 150px,
+    rgba(167,139,250,.85) 152px,
+    transparent 154px, transparent 260px);
+  background-size:340% 340%;
+  mix-blend-mode:screen;
+  animation:glyph-streaks 5.5s linear infinite;
+}
+@keyframes glyph-streaks{
+  0%{background-position:0% 0%}
+  100%{background-position:-200% -200%}
+}
+
 a{color:inherit;text-decoration:none}
 .container{max-width:1120px;margin:0 auto;padding:0 24px}
 .muted{color:var(--muted)}
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
 section[id]{scroll-margin-top:110px}
+
+/* ---------- FOND TECH ANIMÉ ---------- */
+#techRain{
+  position:fixed;inset:0;width:100%;height:100%;
+  z-index:-1;pointer-events:none;
+  opacity:.55;
+}
+:root.light #techRain{opacity:.3}
+@media(prefers-reduced-motion:reduce){#techRain{display:none}}
+main,footer{position:relative;z-index:1}
+
 
 /* ---------- NAV ---------- */
 .nav-wrap{position:fixed;top:18px;left:0;right:0;z-index:100;display:flex;justify-content:center;padding:0 16px}
@@ -404,7 +508,8 @@ section[id]{scroll-margin-top:110px}
 /* ---------- CONTACT ---------- */
 .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:18px}
 .contact-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;align-items:center;gap:14px}
-.contact-icon{width:40px;height:40px;border-radius:10px;background:var(--panel-2);display:flex;align-items:center;justify-content:center;font-size:16px;flex:none}
+.contact-icon{width:40px;height:40px;border-radius:10px;background:var(--panel-2);display:flex;align-items:center;justify-content:center;font-size:16px;flex:none;color:var(--accent);border:1px solid color-mix(in srgb, var(--accent) 35%, transparent)}
+.contact-icon svg{width:19px;height:19px;display:block}
 .contact-card small{color:var(--muted-2);font-size:11.5px;display:block;margin-bottom:2px}
 .contact-card a.val{font-weight:700;font-size:.92rem}
 .opportunity{background:linear-gradient(120deg,var(--amber),var(--orange));border-radius:16px;padding:28px;color:#0a0a0a}
@@ -420,6 +525,185 @@ footer .copy{color:var(--muted-2);font-size:12.5px;font-family:'JetBrains Mono'}
 </style>
 </head>
 <body>
+
+<canvas id="techRain" aria-hidden="true"></canvas>
+<div id="glyphShine" aria-hidden="true"></div>
+<div id="glyphStreaks" aria-hidden="true"></div>
+<div class="glyph-sparks" aria-hidden="true">
+  <span class="spark" style="--x:8%;--y:18%;--sz:190px;--c:251,191,36;--dur:6.5s;--delay:0s"></span>
+  <span class="spark" style="--x:82%;--y:12%;--sz:170px;--c:167,139,250;--dur:7.8s;--delay:1.4s"></span>
+  <span class="spark" style="--x:28%;--y:58%;--sz:210px;--c:249,115,22;--dur:8.4s;--delay:2.7s"></span>
+  <span class="spark" style="--x:70%;--y:70%;--sz:180px;--c:34,197,94;--dur:7.2s;--delay:.8s"></span>
+  <span class="spark" style="--x:48%;--y:35%;--sz:200px;--c:251,191,36;--dur:9.2s;--delay:3.6s"></span>
+  <span class="spark" style="--x:15%;--y:85%;--sz:160px;--c:167,139,250;--dur:7.5s;--delay:2s"></span>
+  <span class="spark" style="--x:60%;--y:25%;--sz:150px;--c:249,115,22;--dur:6.8s;--delay:4.4s"></span>
+  <span class="spark" style="--x:38%;--y:90%;--sz:170px;--c:34,197,94;--dur:8s;--delay:5.2s"></span>
+  <span class="spark spark-orange" style="--x:20%;--y:32%;--sz:150px;--c:249,115,22;--dur:6s;--delay:.3s"></span>
+  <span class="spark spark-orange" style="--x:65%;--y:45%;--sz:170px;--c:249,115,22;--dur:7s;--delay:2.1s"></span>
+  <span class="spark spark-orange" style="--x:88%;--y:80%;--sz:140px;--c:249,115,22;--dur:5.5s;--delay:3.4s"></span>
+  <span class="spark spark-orange" style="--x:45%;--y:12%;--sz:160px;--c:249,115,22;--dur:8.2s;--delay:1.1s"></span>
+  <span class="spark spark-orange" style="--x:5%;--y:62%;--sz:130px;--c:249,115,22;--dur:6.6s;--delay:4.6s"></span>
+</div>
+<script>
+(function(){
+  var canvas = document.getElementById('techRain');
+  if(!canvas) return;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ctx = canvas.getContext('2d');
+  var CHARS = '†‡§¶◆◇△▽○●✦✧'.split('');
+  var COLORS = ['#fbbf24','#f97316','#3b82f6','#22c55e','#a78bfa'];
+  var w, h, fontSize = 21, columns, drops;
+
+  function setup(){
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    columns = Math.max(1, Math.floor(w / fontSize));
+    drops = [];
+    for (var i = 0; i < columns; i++){
+      drops.push({
+        y: Math.random() * -h,
+        speed: 1 + Math.random() * 2,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        len: 6 + Math.floor(Math.random() * 10)
+      });
+    }
+  }
+  window.addEventListener('resize', setup);
+  setup();
+
+  if (reduceMotion){
+    canvas.style.display = 'none';
+  } else {
+    (function frame(){
+      ctx.clearRect(0, 0, w, h);
+      ctx.font = fontSize + 'px "JetBrains Mono", monospace';
+      ctx.textBaseline = 'top';
+      for (var i = 0; i < columns; i++){
+        var d = drops[i];
+        for (var j = 0; j < d.len; j++){
+          var yy = d.y - j * fontSize;
+          if (yy < -fontSize || yy > h) continue;
+          var alpha = Math.max(0, 1 - j / d.len) * 0.85;
+          ctx.globalAlpha = alpha;
+          ctx.fillStyle = d.color;
+          ctx.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], i * fontSize, yy);
+        }
+        d.y += d.speed;
+        if (d.y - d.len * fontSize > h){
+          d.y = Math.random() * -200;
+          d.speed = 1 + Math.random() * 2;
+          d.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+          d.len = 6 + Math.floor(Math.random() * 10);
+        }
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(frame);
+    })();
+  }
+})();
+
+/* ========= 150 glyphes uniques générés (fond + masque du balayage) ========= */
+(function(){
+  function mulberry32(seed){
+    return function(){
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  var pick = mulberry32(20260912);
+  var COLS = 15, ROWS = 10, CELL = 46, PAD = 8;
+  var W = COLS * CELL, H = ROWS * CELL;
+  var KINDS = ['h','v','d1','d2','arc','box','dot','bracketL','bracketR','corner','tri'];
+
+  var glyphs = [];
+  for (var i = 0; i < COLS * ROWS; i++){
+    var n = 2 + Math.floor(pick() * 4);
+    var strokes = [];
+    for (var k = 0; k < n; k++) strokes.push(KINDS[Math.floor(pick() * KINDS.length)]);
+    glyphs.push(strokes);
+  }
+
+  function drawStroke(ctx, kind, x, y, rnd){
+    var s = CELL - PAD * 2;
+    switch(kind){
+      case 'h':
+        var yy = y + PAD + rnd() * s;
+        ctx.beginPath(); ctx.moveTo(x + PAD, yy); ctx.lineTo(x + PAD + s, yy); ctx.stroke();
+        break;
+      case 'v':
+        var xx = x + PAD + rnd() * s;
+        ctx.beginPath(); ctx.moveTo(xx, y + PAD); ctx.lineTo(xx, y + PAD + s); ctx.stroke();
+        break;
+      case 'd1':
+        ctx.beginPath(); ctx.moveTo(x + PAD, y + PAD); ctx.lineTo(x + PAD + s, y + PAD + s); ctx.stroke();
+        break;
+      case 'd2':
+        ctx.beginPath(); ctx.moveTo(x + PAD + s, y + PAD); ctx.lineTo(x + PAD, y + PAD + s); ctx.stroke();
+        break;
+      case 'arc':
+        ctx.beginPath(); ctx.arc(x + PAD + s/2, y + PAD + s/2, s/3, rnd()*6.28, rnd()*6.28 + 3.14); ctx.stroke();
+        break;
+      case 'box':
+        ctx.strokeRect(x + PAD + s*0.15, y + PAD + s*0.15, s*0.7, s*0.7);
+        break;
+      case 'dot':
+        ctx.beginPath(); ctx.arc(x + PAD + rnd()*s, y + PAD + rnd()*s, 1.7, 0, 6.28); ctx.fill();
+        break;
+      case 'bracketL':
+        ctx.beginPath(); ctx.moveTo(x+PAD+s*0.3,y+PAD); ctx.lineTo(x+PAD,y+PAD); ctx.lineTo(x+PAD,y+PAD+s); ctx.lineTo(x+PAD+s*0.3,y+PAD+s); ctx.stroke();
+        break;
+      case 'bracketR':
+        ctx.beginPath(); ctx.moveTo(x+PAD+s*0.7,y+PAD); ctx.lineTo(x+PAD+s,y+PAD); ctx.lineTo(x+PAD+s,y+PAD+s); ctx.lineTo(x+PAD+s*0.7,y+PAD+s); ctx.stroke();
+        break;
+      case 'corner':
+        ctx.beginPath(); ctx.moveTo(x+PAD, y+PAD+s*0.6); ctx.lineTo(x+PAD, y+PAD); ctx.lineTo(x+PAD+s*0.6, y+PAD); ctx.stroke();
+        break;
+      case 'tri':
+        ctx.beginPath(); ctx.moveTo(x+PAD+s/2, y+PAD); ctx.lineTo(x+PAD, y+PAD+s); ctx.lineTo(x+PAD+s, y+PAD+s); ctx.closePath(); ctx.stroke();
+        break;
+    }
+  }
+
+  function renderTile(color, lineWidth){
+    var c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    var ctx = c.getContext('2d');
+    ctx.strokeStyle = color; ctx.fillStyle = color;
+    ctx.lineWidth = lineWidth; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    var rnd = mulberry32(20260912);
+    var idx = 0;
+    for (var r = 0; r < ROWS; r++){
+      for (var col = 0; col < COLS; col++){
+        var x = col * CELL, y = r * CELL;
+        glyphs[idx].forEach(function(kind){ drawStroke(ctx, kind, x, y, rnd); });
+        idx++;
+      }
+    }
+    return c.toDataURL('image/png');
+  }
+
+  var bgDark = renderTile('rgba(251,191,36,0.17)', 1.3);
+  var bgLight = renderTile('rgba(180,83,9,0.14)', 1.3);
+  var maskImg = renderTile('#000', 2);
+
+  var styleTag = document.createElement('style');
+  styleTag.textContent =
+    'body{background-image:url(' + bgDark + ');background-repeat:repeat;}' +
+    ':root.light body{background-image:url(' + bgLight + ');}' +
+    '#glyphShine{-webkit-mask-image:url(' + maskImg + ');mask-image:url(' + maskImg + ');' +
+    '-webkit-mask-repeat:repeat;mask-repeat:repeat;' +
+    '-webkit-mask-size:' + W + 'px ' + H + 'px;mask-size:' + W + 'px ' + H + 'px;}' +
+    '#glyphStreaks{-webkit-mask-image:url(' + maskImg + ');mask-image:url(' + maskImg + ');' +
+    '-webkit-mask-repeat:repeat;mask-repeat:repeat;' +
+    '-webkit-mask-size:' + W + 'px ' + H + 'px;mask-size:' + W + 'px ' + H + 'px;}' +
+    '.glyph-sparks{-webkit-mask-image:url(' + maskImg + ');mask-image:url(' + maskImg + ');' +
+    '-webkit-mask-repeat:repeat;mask-repeat:repeat;' +
+    '-webkit-mask-size:' + W + 'px ' + H + 'px;mask-size:' + W + 'px ' + H + 'px;}';
+  document.head.appendChild(styleTag);
+})();
+</script>
 
 <div class="nav-wrap">
   <div class="nav-pill">
@@ -766,23 +1050,23 @@ footer .copy{color:var(--muted-2);font-size:12.5px;font-family:'JetBrains Mono'}
       <h2 data-i18n="contact.title">Une opportunité ?</h2>
     </div>
     <div class="contact-grid reveal">
-      <div class="contact-card">
-        <div class="contact-icon">✉️</div>
+      <div class="contact-card" style="--accent:var(--amber)">
+        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.3l8.5 6 8.5-6"/></svg></div>
         <div><small>Email</small><a class="val" href="mailto:abderabbi.rodouawn@gmail.com">abderabbi.rodouawn@gmail.com</a></div>
       </div>
-      <div class="contact-card">
-        <div class="contact-icon">💼</div>
+      <div class="contact-card" style="--accent:var(--blue)">
+        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.2"/><circle cx="9" cy="10" r="2"/><path d="M5.8 16.8c.5-2.2 2.1-3.3 3.2-3.3s2.7 1.1 3.2 3.3"/><path d="M15 9h4M15 12.3h4M15 15.6h2.6"/></svg></div>
         <div><small>LinkedIn</small><a class="val" href="https://www.linkedin.com/in/rodouawn-abderabbi/" target="_blank" rel="noopener" data-i18n="contact.linkedinValue">Mon profil LinkedIn</a></div>
       </div>
-      <div class="contact-card">
-        <div class="contact-icon">🐙</div>
+      <div class="contact-card" style="--accent:var(--purple)">
+        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 .3C5.4.3 0 5.6 0 12.3c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6C20.6 22.1 24 17.6 24 12.3 24 5.6 18.6.3 12 .3z"/></svg></div>
         <div><small>GitHub</small><a class="val" href="#">github.com/abderabbirodouawn</a></div>
       </div>
     </div>
     <div class="opportunity reveal">
       <h3 data-i18n="opportunity.title">Ouvert à toute opportunité.</h3>
       <p data-i18n="opportunity.text">IT, Data ou DevOps — je suis disponible pour un CDI en Île-de-France. N'hésitez pas à me contacter, je réponds rapidement.</p>
-      <a href="mailto:abderabbi.rodouawn@gmail.com?subject=Opportunit%C3%A9%20professionnelle&body=Bonjour%20Abderabbi%2C%0A%0AJe%20vous%20contacte%20au%20sujet%20d%27une%20opportunit%C3%A9..." class="btn-white">✉️ <span data-i18n="opportunity.cta">Me contacter</span></a>
+      <a href="mailto:abderabbi.rodouawn@gmail.com?subject=Opportunit%C3%A9%20professionnelle&body=Bonjour%20Abderabbi%2C%0A%0AJe%20vous%20contacte%20au%20sujet%20d%27une%20opportunit%C3%A9..." class="btn-white"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.3l8.5 6 8.5-6"/></svg><span data-i18n="opportunity.cta">Me contacter</span></a>
     </div>
   </section>
 </main>
@@ -790,7 +1074,16 @@ footer .copy{color:var(--muted-2);font-size:12.5px;font-family:'JetBrains Mono'}
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand"><span class="logo-badge" style="width:28px;height:28px;font-size:10px">A.R</span> Abderabbi Rodouawn</div>
-    <div class="copy" data-i18n="footer.copy">© 2026 · Tous droits réservés</div>
+    <svg viewBox="0 0 24 24" width="20" height="20" style="flex:none">
+      <defs><linearGradient id="gradEye" x1="0" y1="0" x2="24" y2="24">
+        <stop offset="0%" style="stop-color:var(--amber)"/><stop offset="100%" style="stop-color:var(--orange)"/>
+      </linearGradient></defs>
+      <path d="M1.5 12C4.5 6.5 8 4 12 4s7.5 2.5 10.5 8c-3 5.5-6.5 8-10.5 8S4.5 17.5 1.5 12z" fill="none" stroke="url(#gradEye)" stroke-width="1.4" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="4.2" fill="none" stroke="url(#gradEye)" stroke-width="1.3"/>
+      <path d="M12 7.8c1 0 1 1.6 2.3 1.6M12 16.2c-1 0-1-1.6-2.3-1.6M7.8 12c0-1 1.6-1 1.6-2.3M16.2 12c0 1-1.6 1-1.6 2.3" stroke="url(#gradEye)" stroke-width="1.1" stroke-linecap="round"/>
+      <circle cx="12" cy="12" r="1.3" fill="url(#gradEye)"/>
+    </svg>
+    <div class="copy"><span data-i18n="footer.copy">© 2026 · Tous droits réservés</span></div>
   </div>
 </footer>
 
