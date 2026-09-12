@@ -500,9 +500,50 @@ main,footer{position:relative;z-index:1}
   padding:9px 12px;font-family:'JetBrains Mono';font-size:11px;color:var(--text);
   text-align:center;flex:1 1 110px;display:flex;align-items:center;justify-content:center;
 }
-.flow-arrow{color:var(--accent);font-size:15px;flex:none;align-self:center;opacity:.7}
+.flow-connector{
+  position:relative;flex:0 0 34px;align-self:center;height:3px;border-radius:3px;
+  background:repeating-linear-gradient(90deg, color-mix(in srgb, var(--accent) 45%, transparent) 0 3px, transparent 3px 7px);
+  overflow:visible;
+}
+.flow-connector::before{
+  content:"";position:absolute;left:0;right:0;top:50%;height:5px;transform:translateY(-50%);
+  border-radius:3px;
+  background:linear-gradient(90deg, transparent 0%, var(--accent) 45%, #fff 50%, var(--accent) 55%, transparent 100%);
+  background-size:220% 100%;
+  filter:drop-shadow(0 0 5px var(--accent));
+  animation:flow-run 1.6s cubic-bezier(.45,0,.2,1) infinite;
+}
+.flow-connector::after{
+  content:"";position:absolute;top:50%;left:0%;width:7px;height:7px;border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 6px 2px var(--accent), 0 0 16px 4px color-mix(in srgb, var(--accent) 55%, transparent);
+  transform:translate(-50%,-50%);
+  animation:flow-dot 1.6s cubic-bezier(.45,0,.2,1) infinite;
+}
+@keyframes flow-run{0%{background-position:170% 0}100%{background-position:-70% 0}}
+@keyframes flow-dot{0%{left:0%;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:100%;opacity:0}}
+.flow-diagram span.flow-connector:nth-of-type(1)::before,.flow-diagram span.flow-connector:nth-of-type(1)::after{animation-delay:0s}
+.flow-diagram span.flow-connector:nth-of-type(2)::before,.flow-diagram span.flow-connector:nth-of-type(2)::after{animation-delay:.4s}
+.flow-diagram span.flow-connector:nth-of-type(3)::before,.flow-diagram span.flow-connector:nth-of-type(3)::after{animation-delay:.8s}
+.flow-diagram span.flow-connector:nth-of-type(4)::before,.flow-diagram span.flow-connector:nth-of-type(4)::after{animation-delay:1.2s}
+@media(prefers-reduced-motion:reduce){.flow-connector::before,.flow-connector::after{animation:none}}
 .detail-caption{font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:12px}
-@media(max-width:560px){.flow-diagram{flex-direction:column}.flow-arrow{transform:rotate(90deg)}}
+@media(max-width:560px){
+  .flow-diagram{flex-direction:column}
+  .flow-connector{flex:0 0 30px;width:3px;height:30px;align-self:center}
+  .flow-connector::before{
+    left:50%;right:auto;top:0;bottom:0;height:auto;width:5px;transform:translateX(-50%);
+    background:linear-gradient(180deg, transparent 0%, var(--accent) 45%, #fff 50%, var(--accent) 55%, transparent 100%);
+    background-size:100% 220%;
+    animation-name:flow-run-v;
+  }
+  .flow-connector::after{
+    top:0%;left:50%;transform:translate(-50%,-50%);
+    animation-name:flow-dot-v;
+  }
+  @keyframes flow-run-v{0%{background-position:0 170%}100%{background-position:0 -70%}}
+  @keyframes flow-dot-v{0%{top:0%;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:100%;opacity:0}}
+}
 @media(max-width:760px){.projects-grid{grid-template-columns:1fr}}
 
 /* ---------- CONTACT ---------- */
@@ -946,9 +987,9 @@ footer .copy{color:var(--muted-2);font-size:12.5px;font-family:'JetBrains Mono'}
           <div class="project-detail-inner">
             <div class="detail-label" data-i18n="proj1.detailLabel">&gt;_ SCHÉMA DU PIPELINE</div>
             <div class="flow-diagram">
-              <div class="flow-step" data-i18n="proj1.flow.0">CSV brut</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj1.flow.1">Nettoyage (Pandas)</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj1.flow.2">Analyse statistique</div><span class="flow-arrow">→</span>
+              <div class="flow-step" data-i18n="proj1.flow.0">CSV brut</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj1.flow.1">Nettoyage (Pandas)</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj1.flow.2">Analyse statistique</div><span class="flow-connector" aria-hidden="true"></span>
               <div class="flow-step" data-i18n="proj1.flow.3">Graphiques (Matplotlib)</div>
             </div>
             <p class="detail-caption" data-i18n="proj1.caption">Le fichier de ventes brut est chargé et nettoyé avec Pandas (valeurs manquantes, types), puis exploré statistiquement avant d'être restitué sous forme de graphiques (évolution des ventes, top produits, répartition par région).</p>
@@ -965,9 +1006,9 @@ footer .copy{color:var(--muted-2);font-size:12.5px;font-family:'JetBrains Mono'}
           <div class="project-detail-inner">
             <div class="detail-label" data-i18n="proj2.detailLabel">&gt;_ SCHÉMA DU PIPELINE</div>
             <div class="flow-diagram">
-              <div class="flow-step" data-i18n="proj2.flow.0">Données brutes</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj2.flow.1">Traitement Python</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj2.flow.2">App Streamlit</div><span class="flow-arrow">→</span>
+              <div class="flow-step" data-i18n="proj2.flow.0">Données brutes</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj2.flow.1">Traitement Python</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj2.flow.2">App Streamlit</div><span class="flow-connector" aria-hidden="true"></span>
               <div class="flow-step" data-i18n="proj2.flow.3">Visualisation Plotly</div>
             </div>
             <p class="detail-caption" data-i18n="proj2.caption">Les données commerciales sont chargées et préparées en Python, puis exposées dans une application Streamlit. L'utilisateur filtre et explore les indicateurs via des graphiques interactifs générés avec Plotly.</p>
@@ -984,10 +1025,10 @@ footer .copy{color:var(--muted-2);font-size:12.5px;font-family:'JetBrains Mono'}
           <div class="project-detail-inner">
             <div class="detail-label" data-i18n="proj3.detailLabel">&gt;_ SCHÉMA DU PIPELINE</div>
             <div class="flow-diagram">
-              <div class="flow-step" data-i18n="proj3.flow.0">Données brutes</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj3.flow.1">Valeurs manquantes</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj3.flow.2">Doublons supprimés</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj3.flow.3">Normalisation</div><span class="flow-arrow">→</span>
+              <div class="flow-step" data-i18n="proj3.flow.0">Données brutes</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj3.flow.1">Valeurs manquantes</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj3.flow.2">Doublons supprimés</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj3.flow.3">Normalisation</div><span class="flow-connector" aria-hidden="true"></span>
               <div class="flow-step" data-i18n="proj3.flow.4">Données propres</div>
             </div>
             <p class="detail-caption" data-i18n="proj3.caption">Chaque étape du pipeline est isolée dans un notebook Jupyter : détection et traitement des valeurs manquantes, suppression des doublons, puis normalisation des formats avant export d'un jeu de données prêt à l'analyse.</p>
@@ -1004,10 +1045,10 @@ footer .copy{color:var(--muted-2);font-size:12.5px;font-family:'JetBrains Mono'}
           <div class="project-detail-inner">
             <div class="detail-label" data-i18n="proj4.detailLabel">&gt;_ SCHÉMA DU PIPELINE</div>
             <div class="flow-diagram">
-              <div class="flow-step" data-i18n="proj4.flow.0">Historique</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj4.flow.1">Feature engineering</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj4.flow.2">Entraînement (Scikit-learn)</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj4.flow.3">Évaluation</div><span class="flow-arrow">→</span>
+              <div class="flow-step" data-i18n="proj4.flow.0">Historique</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj4.flow.1">Feature engineering</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj4.flow.2">Entraînement (Scikit-learn)</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj4.flow.3">Évaluation</div><span class="flow-connector" aria-hidden="true"></span>
               <div class="flow-step" data-i18n="proj4.flow.4">Prédiction</div>
             </div>
             <p class="detail-caption" data-i18n="proj4.caption">Les données historiques sont transformées en variables exploitables, puis un modèle Scikit-learn est entraîné et évalué (précision, erreur) avant d'être utilisé pour prédire de nouvelles valeurs.</p>
@@ -1024,9 +1065,9 @@ footer .copy{color:var(--muted-2);font-size:12.5px;font-family:'JetBrains Mono'}
           <div class="project-detail-inner">
             <div class="detail-label" data-i18n="proj5.detailLabel">&gt;_ SCHÉMA RÉSEAU</div>
             <div class="flow-diagram">
-              <div class="flow-step" data-i18n="proj5.flow.0">Internet</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj5.flow.1">Routeur</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj5.flow.2">Switch (VLAN 10 / 20)</div><span class="flow-arrow">→</span>
+              <div class="flow-step" data-i18n="proj5.flow.0">Internet</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj5.flow.1">Routeur</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj5.flow.2">Switch (VLAN 10 / 20)</div><span class="flow-connector" aria-hidden="true"></span>
               <div class="flow-step" data-i18n="proj5.flow.3">Postes utilisateurs</div>
             </div>
             <p class="detail-caption" data-i18n="proj5.caption">Le routeur assure la connexion internet et le routage inter-VLAN. Le switch segmente le réseau en VLANs (par exemple service / administration) pour isoler le trafic, sécuriser les échanges et faciliter la supervision.</p>
@@ -1043,10 +1084,10 @@ footer .copy{color:var(--muted-2);font-size:12.5px;font-family:'JetBrains Mono'}
           <div class="project-detail-inner">
             <div class="detail-label" data-i18n="proj6.detailLabel">&gt;_ SCHÉMA CI/CD</div>
             <div class="flow-diagram">
-              <div class="flow-step" data-i18n="proj6.flow.0">Git push</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj6.flow.1">Build Docker</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj6.flow.2">Tests CI</div><span class="flow-arrow">→</span>
-              <div class="flow-step" data-i18n="proj6.flow.3">Registry</div><span class="flow-arrow">→</span>
+              <div class="flow-step" data-i18n="proj6.flow.0">Git push</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj6.flow.1">Build Docker</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj6.flow.2">Tests CI</div><span class="flow-connector" aria-hidden="true"></span>
+              <div class="flow-step" data-i18n="proj6.flow.3">Registry</div><span class="flow-connector" aria-hidden="true"></span>
               <div class="flow-step" data-i18n="proj6.flow.4">Déploiement K8s</div>
             </div>
             <p class="detail-caption" data-i18n="proj6.caption">Chaque push déclenche un build de l'image Docker et une suite de tests automatisés. Si tout passe, l'image est publiée sur un registre puis déployée automatiquement sur le cluster Kubernetes.</p>
