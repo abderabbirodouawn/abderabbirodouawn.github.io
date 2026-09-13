@@ -211,10 +211,33 @@ main,footer{position:relative;z-index:1}
 .brand-icon-pill:hover svg{transform:rotate(18deg)}
 :root.light .brand-icon-pill{border-color:rgba(251,191,36,.4)}
 .btn-cta{
-  background:#fff;color:#000;padding:10px 18px;border-radius:999px;
+  position:relative;
+  background:linear-gradient(var(--panel),var(--panel)) padding-box,
+             linear-gradient(90deg,var(--amber),var(--orange)) border-box;
+  border:1.5px solid transparent;
+  color:var(--text);
+  padding:9px 18px;border-radius:999px;
   font-weight:700;font-size:13px;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:transform .3s ease, box-shadow .3s ease, background .35s ease, color .35s ease;
+  box-shadow:0 6px 16px rgba(249,115,22,.16);
 }
-:root.light .btn-cta{background:#0d0e12;color:#fff}
+.btn-cta:hover{
+  transform:translateY(-1px);
+  color:#0a0a0a;
+  background:linear-gradient(90deg,var(--amber),var(--orange)) padding-box,
+             linear-gradient(90deg,var(--amber),var(--orange)) border-box;
+  box-shadow:0 12px 28px rgba(249,115,22,.38);
+}
+.btn-cta .cv-icon{
+  display:flex;align-items:center;justify-content:center;flex:none;
+  width:18px;height:18px;border-radius:50%;
+  background:color-mix(in srgb, var(--text) 10%, transparent);
+  transition:transform .3s ease, background .3s ease;
+}
+.btn-cta:hover .cv-icon{background:rgba(0,0,0,.16)}
+.btn-cta .cv-icon svg{width:11px;height:11px;display:block;transition:transform .3s ease}
+.btn-cta:hover .cv-icon svg{transform:translateY(1.5px)}
 .burger-btn{display:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--border-strong);background:var(--panel-2);color:var(--text);cursor:pointer;font-size:15px}
 @media(max-width:880px){
   .nav-links{display:none;position:absolute;top:56px;left:0;right:0;flex-direction:column;background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:10px;gap:2px;box-shadow:var(--shadow)}
@@ -670,10 +693,15 @@ footer .copy{color:var(--muted-2);font-size:12.5px;font-family:'JetBrains Mono'}
   })();
 })();
 
-/* ========= 150 glyphes uniques générés (fond + masque du balayage) ========= */
+/* ========= Glyphes uniques générés (fond + masque du balayage) ========= */
 (function(){
   var isMobile = window.innerWidth <= 820 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  if (isMobile) return; /* évite de générer plusieurs canvases lourds sur mobile */
+  /* Sur mobile on génère quand même la tuile de fond (c'est un simple dessin
+     sur canvas hors-écran, peu coûteux) mais avec moins de cellules et des
+     glyphes plus grands : la tuile finale est plus grande et se répète
+     beaucoup moins souvent sur un écran étroit, donc le "fond d'écran" ne
+     paraît plus petit ni trop chargé. Seuls les calques animés (balayage,
+     étincelles, traits) restent désactivés sur mobile via le CSS ci-dessus. */
   function mulberry32(seed){
     return function(){
       seed |= 0; seed = seed + 0x6D2B79F5 | 0;
@@ -683,7 +711,7 @@ footer .copy{color:var(--muted-2);font-size:12.5px;font-family:'JetBrains Mono'}
     };
   }
   var pick = mulberry32(20260912);
-  var COLS = 15, ROWS = 10, CELL = 46, PAD = 8;
+  var COLS = isMobile ? 9 : 15, ROWS = isMobile ? 6 : 10, CELL = isMobile ? 76 : 46, PAD = isMobile ? 12 : 8;
   var W = COLS * CELL, H = ROWS * CELL;
   var KINDS = ['h','v','d1','d2','arc','box','dot','bracketL','bracketR','corner','tri'];
 
@@ -754,9 +782,10 @@ footer .copy{color:var(--muted-2);font-size:12.5px;font-family:'JetBrains Mono'}
     return c.toDataURL('image/png');
   }
 
-  var bgDark = renderTile('rgba(251,191,36,0.17)', 1.3);
-  var bgLight = renderTile('rgba(180,83,9,0.14)', 1.3);
-  var maskImg = renderTile('#000', 2);
+  var strokeWidth = isMobile ? 1.7 : 1.3;
+  var bgDark = renderTile('rgba(251,191,36,0.17)', strokeWidth);
+  var bgLight = renderTile('rgba(180,83,9,0.14)', strokeWidth);
+  var maskImg = renderTile('#000', isMobile ? 2.4 : 2);
 
   var styleTag = document.createElement('style');
   styleTag.textContent =
@@ -789,7 +818,7 @@ footer .copy{color:var(--muted-2);font-size:12.5px;font-family:'JetBrains Mono'}
     <div class="nav-actions">
       <button class="icon-pill lang-pill brand-icon-pill" id="langToggle" data-i18n-attr="title:lang.toggle;aria-label:lang.toggle" title="Changer de langue" aria-label="Changer de langue"><span class="globe" id="langIcon"></span><span id="langLabel">FR</span></button>
       <button class="icon-pill brand-icon-pill" id="themeToggle" data-i18n-attr="title:theme.toggle;aria-label:theme.toggle" title="Changer de thème" aria-label="Changer de thème"></button>
-      <a href="https://www.dropbox.com/scl/fi/217um3oefajkv2mrs6c9a/cv-abderabbi-rodouawn-Technicien-Syst-mes-d-Information-1.pdf?rlkey=aruo8lin8sf0xo1oxnslp0whl&st=91qnyeos&dl=1" target="_blank" rel="noopener" download="CV-Abderabbi-Rodouawn.pdf" class="btn-cta"><span class="full" data-i18n="nav.cv">Télécharger CV</span> ↗</a>
+      <a href="https://www.dropbox.com/scl/fi/217um3oefajkv2mrs6c9a/cv-abderabbi-rodouawn-Technicien-Syst-mes-d-Information-1.pdf?rlkey=aruo8lin8sf0xo1oxnslp0whl&st=91qnyeos&dl=1" target="_blank" rel="noopener" download="CV-Abderabbi-Rodouawn.pdf" class="btn-cta"><span class="cv-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11.5"/><path d="M7.5 10.5L12 15l4.5-4.5"/><path d="M5 19.5h14"/></svg></span><span class="full" data-i18n="nav.cv">Télécharger CV</span></a>
       <button class="burger-btn" id="burgerBtn">☰</button>
     </div>
   </div>
