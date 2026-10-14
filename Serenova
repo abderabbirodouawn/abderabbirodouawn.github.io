@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SERENOVA — Science, Beauty, Wellbeing</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f1e8;--bg2:#efe4d3;--card:#fbf7f0;--ink:#1c1a17;--mute:#6f665a;--gold:#a67c52;--gold2:#d4b48a;--line:#e3d6c2;--glow:rgba(212,180,138,.35);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17130f;--bg2:#211b15;--card:#1e1913;--ink:#f3eadb;--mute:#a89b88;--gold:#d4b48a;--gold2:#a67c52;--line:#33291f;--glow:rgba(212,180,138,.18);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17130f;--bg2:#211b15;--card:#1e1913;--ink:#f3eadb;--mute:#a89b88;--gold:#d4b48a;--gold2:#a67c52;--line:#33291f;--glow:rgba(212,180,138,.18);color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:Jost,system-ui,sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden}
+.serif{font-family:"Cormorant Garamond",Georgia,serif}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold2),var(--gold));width:0;z-index:50}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:18px 5vw;z-index:40;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 70%,transparent)}
+.logo{letter-spacing:.5em;font-weight:400;font-size:15px}
+nav ul{display:flex;gap:30px;list-style:none;padding:0;font-size:13px;letter-spacing:.2em}
+nav ul a{position:relative;padding:4px 0}
+nav ul a:after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .5s}
+nav ul a:hover:after{transform:scaleX(1);transform-origin:left}
+@media(max-width:700px){nav ul{display:none}}
+.glow{position:fixed;width:420px;height:420px;border-radius:50%;background:radial-gradient(var(--glow),transparent 65%);pointer-events:none;transform:translate(-50%,-50%);z-index:0;left:50%;top:40%;transition:left .6s ease-out,top .6s ease-out}
+section{position:relative;z-index:1;padding:120px 6vw}
+.hero{min-height:100vh;display:grid;place-items:center;text-align:center;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;animation:drift 18s ease-in-out infinite alternate}
+.b1{width:420px;height:420px;background:var(--gold2);top:8%;left:-6%}
+.b2{width:340px;height:340px;background:var(--bg2);right:-4%;top:30%;animation-delay:-6s;opacity:.9}
+.b3{width:260px;height:260px;background:var(--gold);bottom:5%;left:35%;animation-delay:-11s;opacity:.3}
+@keyframes drift{to{transform:translate(70px,-50px) scale(1.2) rotate(40deg)}}
+.hero h1{font-weight:300;font-size:clamp(44px,11vw,150px);letter-spacing:.32em;margin-right:-.32em;line-height:1}
+.hero h1 span{display:inline-block;opacity:0;transform:translateY(80px) rotate(8deg);filter:blur(10px);animation:pop 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes pop{to{opacity:1;transform:none;filter:none}}
+.tag{margin-top:28px;font-size:13px;letter-spacing:.5em;color:var(--mute);opacity:0;animation:fade 1.2s 1.6s forwards}
+.tag i{color:var(--gold);font-style:normal;margin:0 .6em}
+.lede{font-size:clamp(22px,3vw,34px);max-width:640px;margin:36px auto 44px;opacity:0;animation:fade 1.2s 2s forwards}
+@keyframes fade{to{opacity:1}}
+.btn{display:inline-block;padding:16px 40px;border-radius:99px;border:1px solid var(--gold);letter-spacing:.25em;font-size:12px;position:relative;overflow:hidden;transition:color .5s,transform .3s;opacity:0;animation:fade 1.2s 2.4s forwards}
+.btn:before{content:"";position:absolute;inset:0;background:var(--gold);transform:translateY(101%);transition:transform .5s cubic-bezier(.2,.8,.2,1);z-index:-1}
+.btn:hover{color:var(--bg);transform:scale(1.05)}.btn:hover:before{transform:none}
+.btn{z-index:0}
+.scroll{position:absolute;bottom:30px;left:50%;width:1px;height:60px;background:var(--line);overflow:hidden}
+.scroll:after{content:"";position:absolute;width:1px;height:20px;background:var(--gold);animation:fall 2s infinite}
+@keyframes fall{from{top:-20px}to{top:60px}}
+.marq{overflow:hidden;border-block:1px solid var(--line);padding:22px 0;background:var(--bg2);position:relative;z-index:1}
+.marq span{margin-right:60px}.marq div{display:flex;width:max-content;animation:slide 70s linear infinite;font-size:26px;white-space:nowrap}
+.marq:hover div{animation-play-state:paused}
+.marq b{color:var(--gold);font-weight:400}
+@keyframes slide{to{transform:translateX(-50%)}}
+h2{font-weight:400;font-size:clamp(34px,5vw,64px);line-height:1.1;text-align:center;margin-bottom:12px}
+.sub{text-align:center;color:var(--mute);max-width:520px;margin:0 auto 70px}
+.rv{opacity:0;transform:translateY(50px);transition:opacity 1s,transform 1s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;max-width:1150px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:34px 28px;position:relative;transition:transform .25s ease-out,box-shadow .4s,border-color .4s;transform-style:preserve-3d}
+.card:hover{border-color:var(--gold2);box-shadow:0 30px 60px -30px var(--glow)}
+.ico{width:76px;height:76px;border-radius:50%;background:var(--bg2);display:grid;place-items:center;margin-bottom:26px;transition:transform .6s}
+.card:hover .ico{transform:rotate(360deg) scale(1.1)}
+.ico svg{width:34px;height:34px;stroke:var(--gold);fill:none;stroke-width:1.3}
+.card h3{font-weight:500;font-size:28px;margin-bottom:4px}
+.pill{display:inline-block;padding:3px 14px;border-radius:99px;background:var(--bg2);font-size:12px;letter-spacing:.15em;margin:6px 0 14px}
+.card p{color:var(--mute);font-size:15px}
+.price{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-size:34px;color:var(--gold);display:flex;justify-content:space-between;align-items:baseline}
+.price small{font-family:Jost;font-size:12px;letter-spacing:.2em;color:var(--mute);cursor:pointer;transition:color .3s}
+.price small:hover{color:var(--gold)}
+.stats{background:var(--bg2);border-block:1px solid var(--line)}
+.stats .grid{text-align:center}
+.num{font-size:clamp(52px,7vw,92px);color:var(--gold);line-height:1}
+.stats p{letter-spacing:.2em;font-size:12px;color:var(--mute);margin-top:10px}
+.ritual{max-width:760px;margin:0 auto;position:relative;padding-left:70px}
+.ritual:before{content:"";position:absolute;left:23px;top:0;bottom:0;width:1px;background:var(--line)}
+.fill{position:absolute;left:23px;top:0;width:1px;background:var(--gold);height:0}
+.step{position:relative;margin-bottom:60px}
+.step:before{content:attr(data-n);position:absolute;left:-70px;top:0;width:47px;height:47px;border-radius:50%;background:var(--bg);border:1px solid var(--gold);color:var(--gold);display:grid;place-items:center;font-family:"Cormorant Garamond",serif;font-size:22px;transition:background .5s,color .5s,transform .5s}
+.step.in:before{background:var(--gold);color:var(--bg);transform:scale(1.12)}
+.step h3{font-weight:500;font-size:30px}
+.step p{color:var(--mute)}
+.promise{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;max-width:1000px;margin:0 auto}
+.promise div{flex:1 1 220px;text-align:center;padding:30px 20px;border-radius:22px;border:1px dashed var(--gold2);transition:background .4s,transform .4s}
+.promise div:hover{background:var(--card);transform:translateY(-8px)}
+.promise svg{width:38px;height:38px;stroke:var(--gold);fill:none;stroke-width:1.2;margin-bottom:12px}
+.promise p{letter-spacing:.12em;font-size:13px}
+.news{text-align:center}
+.news form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:520px;margin:0 auto}
+.news input{flex:1 1 240px;padding:16px 24px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;transition:border-color .3s,box-shadow .3s}
+.news input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 5px var(--glow)}
+.news button.btn{opacity:1;animation:none;background:none;color:var(--ink);cursor:pointer;font-family:inherit}
+.ok{margin-top:20px;color:var(--gold);min-height:28px;font-size:20px}
+footer{text-align:center;padding:50px 6vw 70px;border-top:1px solid var(--line);color:var(--mute);font-size:12px;letter-spacing:.2em;position:relative;z-index:1}
+footer .logo{display:block;color:var(--ink);margin-bottom:10px}
+.theme{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:45;width:46px;height:46px;border-radius:50%;border:1px solid var(--gold);background:var(--card);color:var(--gold);cursor:pointer;font-size:18px;transition:transform .5s}
+.theme:hover{transform:rotate(180deg)}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.hero h1 span,.tag,.lede,.btn,.rv{opacity:1!important;transform:none!important;filter:none!important}}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<div class="glow" id="glow"></div>
+<nav><a href="#top" class="logo">SERENOVA</a><ul><li><a href="#soins">RÉÉQUILIBRAGE</a></li><li><a href="#chiffres">ALIMENTATION</a></li><li><a href="#rituel">AIDE</a></li><li><a href="#contact">SCIENCE</a></li></ul></nav>
+
+<section class="hero" id="top">
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<div style="position:relative">
+<h1 class="serif" id="title" aria-label="Serenova"></h1>
+<p class="tag">SCIENCE<i>•</i>BEAUTY<i>•</i>WELLBEING</p>
+<p class="lede serif">Des soins pour la peau, pensés avec rigueur et vécus comme un rituel.</p>
+<a href="#soins" class="btn">DÉCOUVRIR LES SOINS</a>
+</div>
+<div class="scroll"></div>
+</section>
+
+<div class="marq" aria-hidden="true"><div id="mq"></div></div>
+
+<section id="soins">
+<h2 class="serif rv">Nos univers</h2>
+<p class="sub rv">Quatre façons de prendre soin de vous, avec méthode et douceur.</p>
+<div class="grid">
+<article class="card rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M8 3c0 4 8 5 8 9s-8 5-8 9"/><path d="M16 3c0 4-8 5-8 9s8 5 8 9"/><path d="M9.5 6.5h5M8.5 12h7M9.5 17.5h5"/></svg></div><h3 class="serif">Rééquilibrage</h3><span class="pill">BILAN 45 MIN</span><p>Un bilan de vie et de rythme pour retrouver de la régularité : sommeil, énergie, stress.</p><div class="price serif">49 €<small>RÉSERVER +</small></div></article>
+<article class="card rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20V9a3 3 0 0 1 3-3h1a2 2 0 0 1 2 2v2c2-1 5-2 7 0 2 1 3 3 3 6 0 2-1 4-3 4z"/><path d="M10 12c1 2.5 3 3.5 5.5 3.5M7 6.5V10"/></svg></div><h3 class="serif">Alimentation</h3><span class="pill">ATELIER</span><p>Des ateliers de cuisine et de nutrition pour manger varié, simplement, sans régime strict.</p><div class="price serif">35 €<small>RÉSERVER +</small></div></article>
+<article class="card rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M7 21c0-3 0-4-1-6-1-2-2-3-2-6a6 6 0 0 1 6-6c3.500 0 6 2.500 6 5.500l1.500 3-1.500.5v2c0 2-2 3.500-4 3.500V21"/><path d="M20 3v4M18 5h4M21 12v2M20 13h2"/></svg></div><h3 class="serif">Aide</h3><span class="pill">ÉCOUTE</span><p>Un accompagnement individuel, à votre rythme, avec une personne qui vous écoute.</p><div class="price serif">Sur rendez-vous<small>RÉSERVER +</small></div></article>
+<article class="card rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8.5v6M9 11.5h6"/></svg></div><h3 class="serif">Science</h3><span class="pill">GUIDES</span><p>Des guides clairs, appuyés sur des sources vérifiées, pour comprendre avant de décider.</p><div class="price serif">Gratuit<small>RÉSERVER +</small></div></article>
+</div>
+</section>
+
+<section class="stats" id="chiffres">
+<div class="grid">
+<div class="rv"><div class="num serif" data-to="98" data-s="%">0</div><p>CLIENTS SATISFAITS</p></div>
+<div class="rv"><div class="num serif" data-to="12" data-s="">0</div><p>ANS DE RECHERCHE</p></div>
+<div class="rv"><div class="num serif" data-to="100" data-s="%">0</div><p>FORMULES VÉGÉTALES</p></div>
+<div class="rv"><div class="num serif" data-to="24" data-s="">0</div><p>TESTS DERMATOLOGIQUES</p></div>
+</div>
+</section>
+
+<section id="rituel">
+<h2 class="serif rv">Le rituel</h2>
+<p class="sub rv">Trois gestes, matin et soir.</p>
+<div class="ritual" id="rit"><div class="fill" id="fill"></div>
+<div class="step rv" data-n="1"><h3 class="serif">Nettoyer</h3><p>Un visage propre, avec de l'eau tiède et un geste doux.</p></div>
+<div class="step rv" data-n="2"><h3 class="serif">Traiter</h3><p>Quelques gouttes de sérum, pressées du centre vers l'extérieur.</p></div>
+<div class="step rv" data-n="3"><h3 class="serif">Protéger</h3><p>Crème la nuit, fluide solaire le jour.</p></div>
+</div>
+</section>
+
+<section>
+<div class="promise">
+<div class="rv"><svg viewBox="0 0 24 24"><path d="M12 2l9 7-9 13L3 9z"/></svg><p>INGRÉDIENTS PURS<br>ET CERTIFIÉS</p></div>
+<div class="rv"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><p>PAIEMENT<br>SÉCURISÉ</p></div>
+<div class="rv"><svg viewBox="0 0 24 24"><path d="M3 12l9-8 9 8M5 10v10h14V10"/></svg><p>LIVRAISON<br>OFFERTE DÈS 80 €</p></div>
+</div>
+</section>
+
+<section class="news" id="contact">
+<h2 class="serif rv">Rejoindre le cercle</h2>
+<p class="sub rv">Conseils de soin et avant-premières, une fois par mois.</p>
+<form class="rv" id="f"><input type="email" required placeholder="Votre e-mail" aria-label="E-mail"><button class="btn">S'INSCRIRE</button></form>
+<p class="ok serif" id="ok" aria-live="polite"></p>
+</section>
+
+<footer><span class="logo">SERENOVA</span>SCIENCE • BEAUTY • WELLBEING<br><br>Marque fictive — maquette de démonstration.</footer>
+<button class="theme" id="th" aria-label="Changer de thème">◐</button>
+
+<script>
+// Titre lettre par lettre
+const t=document.getElementById('title');
+"SERENOVA".split('').forEach((c,i)=>{const s=document.createElement('span');s.textContent=c;s.style.animationDelay=(.2+i*.12)+'s';t.appendChild(s)});
+// Marquee
+const words=["Rééquilibrage","Alimentation","Aide","Science","Beauty","Wellbeing"];
+const mq=document.getElementById('mq');
+mq.innerHTML=Array(8).fill(words).flat().map(w=>`<span class="serif">${w} <b>✦</b></span>`).join('');
+// Reveal + compteurs + étapes
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;
+ const el=e.target;setTimeout(()=>el.classList.add('in'),(el.dataset.d||0));
+ el.querySelectorAll&&el.querySelectorAll('.num').forEach(count);io.unobserve(el)}),{threshold:.2});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.dataset.d=(i%4)*120;io.observe(el)});
+function count(n){const to=+n.dataset.to,s=n.dataset.s,t0=performance.now();
+ (function f(t){const p=Math.min((t-t0)/1800,1);n.textContent=Math.round(to*(1-Math.pow(1-p,4)))+s;if(p<1)requestAnimationFrame(f)})(t0)}
+// Barre de progression + fil du rituel
+const bar=document.getElementById('bar'),fill=document.getElementById('fill'),rit=document.getElementById('rit');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+ const r=rit.getBoundingClientRect(),p=Math.min(Math.max((innerHeight*.7-r.top)/r.height,0),1);fill.style.height=(p*100)+'%'},{passive:true});
+// Halo qui suit la souris
+const g=document.getElementById('glow');
+addEventListener('pointermove',e=>{g.style.left=e.clientX+'px';g.style.top=e.clientY+'px'});
+// Inclinaison 3D des cartes
+document.querySelectorAll('.card').forEach(c=>{
+ c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  c.style.transform=`perspective(800px) rotateY(${x*12}deg) rotateX(${-y*12}deg) translateY(-6px)`});
+ c.addEventListener('pointerleave',()=>c.style.transform='')});
+// Ajouter + formulaire + thème
+document.querySelectorAll('.price small').forEach(b=>b.addEventListener('click',()=>{b.textContent='RÉSERVÉ ✓';setTimeout(()=>b.textContent='RÉSERVER +',1800)}));
+document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();document.getElementById('ok').textContent='Merci, vous faites partie du cercle.';e.target.reset()});
+document.getElementById('th').addEventListener('click',()=>{const d=document.documentElement,dark=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;d.dataset.theme=dark?'light':'dark'});
+</script>
+</body>
+</html>
